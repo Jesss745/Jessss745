@@ -1,4 +1,5 @@
 :root {
+    /* BRAND COLORS */
     --white: #FFFFFf;
     --neutral-white: #F6F5F4;
     --neutral-100: #DCDCDC;
@@ -10,31 +11,31 @@
     --green-300: #2b4521;
     --accent: #88333D;
   }
-
+  
   .color-black {
     background-color: var(--neutral-black);
   }
-
+  
   .color-neutral-600 {
     background-color: var(--neutral-600);
   }
-
+  
   .color-neutral-300 {
     background-color: var(--neutral-300);
   }
-
+  
   .color-neutral-100 {
     background-color: var(--neutral-100);
   }
-
+  
   .color-white {
     background-color: var(--neutral-white);
   }
-
+  
   .color-green-300 {
     background-color: var(--green-300);
   }
-
+  
   .color-green-200 {
     background-color: var(--green-200);
   }
@@ -42,7 +43,7 @@
   .color-green-100 {
     background-color: var(--green-100);
   }
-
+  
   .color-accent {
     background-color: var(--accent);
   }
