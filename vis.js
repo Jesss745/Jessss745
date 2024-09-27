@@ -22,7 +22,7 @@ function createRectangle(x, y, width, height, color) {
   return rect;
 }
 
-// Function to generate random color
+// Function to generate random color, I used CHATGPT to crate the random color function
 function getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -34,34 +34,35 @@ function getRandomColor() {
 
 // Function to clear the SVG canvas
 function clearCanvas() {
-    svg.innerHTML = ''; // Clear the SVG by setting innerHTML to an empty string
+  svg.innerHTML = ''; 
 }
 
 // Function to generate the artwork
 function generateArtwork() {
-    clearCanvas(); // Clear the previous artwork
-    for (let i = 0; i < 15; i++) {
-        let circle = createCircle(
-            Math.random() * 500,   // Random x position
-            Math.random() * 500,   // Random y position
-            Math.random() * 50 + 10,  // Random radius
-            getRandomColor()       // Random color
-        );
-        svg.appendChild(circle);
+  clearCanvas(); // Clear the previous artwork
 
-        let rect = createRectangle(
-            Math.random() * 400,  // Random x position
-            Math.random() * 400,  // Random y position
-            Math.random() * 100 + 50,  // Random width
-            Math.random() * 100 + 50,  // Random height
-            getRandomColor()      // Random color
-        );
-        svg.appendChild(rect);
+  for (let i = 0; i < 15; i++) {
+    let circle = createCircle(
+      Math.random() * 800,   // Random x position
+      Math.random() * 800,   // Random y position
+      Math.random() * 50 + 10,  // Random radius
+      getRandomColor()       // Random color
+    );
+    svg.appendChild(circle);
+
+    let rect = createRectangle(
+      Math.random() * 500,  // Random x position
+      Math.random() * 500,  // Random y position
+      Math.random() * 100 + 50,  // Random width
+      Math.random() * 100 + 50,  // Random height
+      getRandomColor()      // Random color
+    );
+      svg.appendChild(rect);
     }
 }
 
 // Initial artwork generation
 generateArtwork();
 
-// Generate a new artwork every 5 seconds
-setInterval(generateArtwork, 5000);
+// Generates a new artwork every 3 seconds
+setInterval(generateArtwork, 4000);

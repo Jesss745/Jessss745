@@ -630,20 +630,3 @@ p > a:focus-visible {
 #gallery {
   margin-top: 2rem;
 }
-
-
-/* SVG stuff */
-body > svg{
-  width:100vw;height:100vh
-}
-  
-circle { mix-blend-mode:multiply;
-  stroke: DeepPink;
-  fill: none;   
-  stroke-width:2.2;
-}
-
-circle:nth-child(2n){stroke:#6ac}
-circle:nth-child(3n){stroke:#678}
-circle:nth-child(4n){stroke:#567}
-circle:nth-child(5n){stroke:#9ab}
