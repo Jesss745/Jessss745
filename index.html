@@ -1,118 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jessica's Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="token.css">
-</head>
-<body>
-    <header id="header">
-        <nav class="nav-container">
-            <a href="index.html"> 
-                <img class="logo" src="img/logo.png" alt="Logo for Jessica's Portfolio">
-            </a>
-            <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link">About Me</a>
-                <a href="projects.html" class="nav-link">Projects</a>
-                <a href="vis.html" class="nav-link">Visualization</a>
-                <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="nav-link">Resume</a>
-            </div>
-        </nav>
-    </header>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jessica's Portfolio</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="token.css">
+    </head>
+    <body>
+        <header id="header">
+            <nav class="nav-container">
+                <a href="index.html"> 
+                    <img class="logo" src="img/logo.png" alt="Logo for Jessica's Portfolio">
+                </a>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link">About Me</a>
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="vis.html" class="nav-link">Visualization</a>
+                    <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="nav-link">Resume</a>
+                </div>
+            </nav>
+        </header>
 
-    <section id="about-me">
-        <div class="about-me">
-            <div class="Personal-Bio">
-                <img class="Bio-Picture" src="img/Works7.png" alt="A drawing of Jess">
-                <div class="Bio-Content">
-                    <h2>Hi, I'm Jess! :)</h2>
-                    <p> I'm an interdisciplinary UX and Product Designer based passionate about bringing my ideas and product into reality through my experince creating illustrations and design.</p>
-                    <div class="btn-container">
-                        <a href="#project-showcase" class="primary-btn">Projects</a>
-                        <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="secondary-btn">Resume</a>
+        <section id="about-me">
+            <div class="about-me">
+                <div class="Personal-Bio">
+                    <img class="Bio-Picture" id="basePic" src="img/Works7.png" alt="Me!">
+                    <div class="Bio-Content">
+                        <h2>Hi, I'm Jess! :)</h2>
+                        <p> I'm an interdisciplinary UX and Product Designer based passionate about bringing my ideas and product into reality through my experince creating illustrations and design.</p>
+                        <button class="blocky" type="button" onclick="PicChange(1)">  <span class="front"> Actual picture of me </span></button>
+                        <button class="blocky" type="button" onclick="PicChange(0)">  <span class="front"> Picture I drew of me </span> </button>
+                        <div class="btn-container">
+                            <a href="#project-showcase" class="primary-btn">Projects</a>
+                            <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="secondary-btn">Resume</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="education" class="section-dividers">
-        <h3> Qualification</h3>
-        <h4> Education </h4>
-        <h5> Simon Fraser University - Faculty of Interactive Arts and Technology</h5>
-        <p> Expected graduation: September 2025</p>
-
-        <h4> Design Experience </h4>
-        <section id="project-showcase">
-            <div>
-                <h4 class="h4_change"> LIVESTOCK - UX Research and Art Direction </h4>
-                <div class="project-hover" >
-                    <a href="livestock_page.html">
-                        <img class="project-image" src="img/LIVESTOCK.png" alt="A case study of my interactive lookbook made for LIVESTOCK ">
-                    <div class="overlay">LIVESTOCK Interactive Lookbook</div>
-                    </a>
-                </div>
-            </div>
-            <div>
-                <h4 class="h4_change"> Candlelight Concert - Art Direction </h4>
-                <div class="project-hover">
-                    <a href="candlelight_page.html">
-                        <img class="project-image" src="img/CANDLELIGHT.png" alt="A case study of a website redesign I made for Candlelight Concert">
-                        <div class="overlay">Candlelight Concert Website Redesign </div>
-                    </a>
                 </div>
             </div>
         </section>
 
-        <h4> Skills </h4>
-        <h5> Tools </h5>
-        <p> Photoshop, Procreate, Illustrator, After Effects, InDesign, Figma, 
-            Sketch, Principle, ProtoPie, HTML/CSS, Blender, Maya </p>
+        <section id="education" class="section-dividers">
+            <h3> Qualification</h3>
+            <h4> Education </h4>
+            <h5> Simon Fraser University - Faculty of Interactive Arts and Technology</h5>
+            <p> Expected graduation: September 2025</p>
 
-        <h5> Design Skills </h5>
-        <p> Interaction Design, User Research, Visual Design, Motion Design, Storyboarding,
-            Wireframing, Prototyping, Journey Mapping</p>
-    </section>
+            <h4> Design Experience </h4>
+            <section id="project-showcase">
+                <div>
+                    <h4 class="h4_change"> LIVESTOCK - UX Research and Art Direction </h4>
+                    <div class="project-hover" >
+                        <a href="livestock_page.html">
+                            <img class="project-image" src="img/LIVESTOCK.png" alt="A case study of my interactive lookbook made for LIVESTOCK ">
+                        <div class="overlay">LIVESTOCK Interactive Lookbook</div>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="h4_change"> Candlelight Concert - Art Direction </h4>
+                    <div class="project-hover">
+                        <a href="candlelight_page.html">
+                            <img class="project-image" src="img/CANDLELIGHT.png" alt="A case study of a website redesign I made for Candlelight Concert">
+                            <div class="overlay">Candlelight Concert Website Redesign </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
 
-    <section id="gallery" class="section-dividers">
-        <h2> Here is my work from the last few months </h2>
-        <div class="gallery-pictures">
-        <img src="img/Works1.png" alt="3D model of a fridge character made on Maya"> 
-        <img src="img/Works2.png" alt="Character Exploration sketches for an animation project">
-        <img src="img/Works3.png" alt="Poster for a ethnography research presentation for LIVESTOCK">
-        <img src="img/Works4.png" alt="UI of a mobile app for PHIRE, a Fire load analyser app. The screen is the analyzed picture portion of the app"> 
-        <img src="img/Works5.png" alt="UI of a mobile app for PHIRE, a Fire load analyser app. The screen is the more information section of the app"> 
-        <img src="img/Works8.gif" alt="A clip from my animation short film projects">
-        </div>
-    </section>
-
-    <footer class="footer-container">
-        <div class="footer-nav">
-            <div class="footer-contact">
-                <a href="mailto:jac49@sfu.ca">
-                    <img class="footer-icon" src="svg/email.svg" alt="Email Icon.">
-                </a>
-                <a href="https://www.linkedin.com/in/jessica-chen">
-                    <img class="footer-icon" src="svg/linkedin.svg" alt="LinkedIn Logo.">
-                </a>
-                <a href="https://https://twitter.com/inuraee">
-                    <img class="footer-icon" src="svg/twitter.svg" alt="Twitter / X Logo.">
-                </a>
+            <h4> Skills </h4>
+            <div class="allSkills">
+                <div class="tools">
+                    <h5> Tools </h5>
+                    <p> Photoshop, Procreate, Illustrator, After Effects, InDesign, Figma, 
+                        Sketch, Principle, ProtoPie, HTML/CSS, Blender, Maya </p>
+                </div>
+                <div class="designSkills">
+                    <h5> Design Skills </h5>
+                    <p> Interaction Design, User Research, Visual Design, Motion Design, Storyboarding,
+                        Wireframing, Prototyping, Journey Mapping</p>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="index.html" class="footer-link">About</a>
-                <a href="project.html #project-showcase" class="footer-link">Projects</a>
-                <a href="vis.html" class="footer-link">Visualization</a>
-                <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="footer-link">Resume</a>
-            </div>
-        </div>
-        <div class="footer-text">
-            <p class="footer-copyright"> Created with Imagination and Whimsy </p>
-            <p class="footer-copyright"> © 2024 Jessica Aurelle Chen </p>
-        </div>
-    </footer>
+        </section>
 
-</body>
+        <section id="gallery" class="section-dividers">
+            <h2> Here is my work from the last few months </h2>
+            <div class="gallery-pictures">
+            <img src="img/Works1.png" alt="3D model of a fridge character made on Maya"> 
+            <img src="img/Works2.png" alt="Character Exploration sketches for an animation project">
+            <img src="img/Works3.png" alt="Poster for a ethnography research presentation for LIVESTOCK">
+            <img src="img/Works4.png" alt="UI of a mobile app for PHIRE, a Fire load analyser app. The screen is the analyzed picture portion of the app"> 
+            <img src="img/Works5.png" alt="UI of a mobile app for PHIRE, a Fire load analyser app. The screen is the more information section of the app"> 
+            <img src="img/Works8.gif" alt="A clip from my animation short film projects">
+            </div>
+        </section>
+
+        <footer class="footer-container">
+            <div class="footer-nav">
+                <div class="footer-contact">
+                    <a href="mailto:jac49@sfu.ca">
+                        <img class="footer-icon" src="svg/email.svg" alt="Email Icon.">
+                    </a>
+                    <a href="https://www.linkedin.com/in/jessica-chen">
+                        <img class="footer-icon" src="svg/linkedin.svg" alt="LinkedIn Logo.">
+                    </a>
+                    <a href="https://https://twitter.com/inuraee">
+                        <img class="footer-icon" src="svg/twitter.svg" alt="Twitter / X Logo.">
+                    </a>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">About</a>
+                    <a href="project.html #project-showcase" class="footer-link">Projects</a>
+                    <a href="vis.html" class="footer-link">Visualization</a>
+                    <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="footer-link">Resume</a>
+                </div>
+            </div>
+            <div class="footer-text">
+                <p class="footer-copyright"> Created with Imagination and Whimsy </p>
+                <p class="footer-copyright"> © 2024 Jessica Aurelle Chen </p>
+            </div>
+        </footer>
+
+    </body>
+    <script src="main.js"></script>
 </html>

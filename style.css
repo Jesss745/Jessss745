@@ -154,6 +154,30 @@ p > a:focus-visible {
 }
 
 /* Buttons */
+
+.blocky {
+  background: var(--green-300);
+  border-radius: 12px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+}
+
+.front {
+  display: block;
+  padding: 12px 10px;
+  border-radius: 12px;
+  font-size: 0.5rem;
+  background: var(--green-250);
+  color: white;
+  transform: translateY(-6px);
+}
+
+.blocky:active .front {
+  transform: translateY(-2px);
+}
+
 .btn-container {
   display: flex;
   flex-direction: row;
@@ -327,6 +351,21 @@ p > a:focus-visible {
   align-content: center;
   max-width: 50%;
 }
+
+.allSkills{
+  display: flex;
+}
+
+.tools{
+  margin: .5rem 3rem 0rem 0rem;
+  width: 35%;
+}
+
+.designSkills{
+  margin:.5rem 0rem 0rem 6rem;
+  width: 35%;
+}
+
 
 .gallery-pictures {
   margin: 0 1rem;

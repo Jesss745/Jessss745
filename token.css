@@ -8,6 +8,7 @@
     --neutral-black: #181817;
     --green-100: #A5B576;
     --green-200: #5a6e3a;
+    --green-250: #42581f;
     --green-300: #2b4521;
     --accent: #88333D;
   }
@@ -34,6 +35,10 @@
   
   .color-green-300 {
     background-color: var(--green-300);
+  }
+
+  .color-green-250 {
+    background-color: var(--green-250);
   }
   
   .color-green-200 {
