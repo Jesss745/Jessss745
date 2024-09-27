@@ -65,4 +65,4 @@ function generateArtwork() {
 generateArtwork();
 
 // Generates a new artwork every 3 seconds
-setInterval(generateArtwork, 4000);
+setInterval(generateArtwork, 3000);
