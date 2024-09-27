@@ -6,3 +6,5 @@ The `index.html` page is currently the only page up from my final portfolio. I d
 As this site kinda included some elements of my old portfolio, I also included some images and SVG's I made to showcase my old work and for my footed. these are in the `img` and `svg` folder. While this isn't the requirement, I hope additional pages is okay.
 
 The `vis.html` page contains some visualization I've created using SVG. One is hard coded, the other is done through javascript that is done in the `vis.js` file :)
+
+Do note that some of the things in the navigation part and the projects linked in the `index.html page doesn't link to anywhere yet.
