@@ -1,7 +1,7 @@
 async function render() {
     // load data
-    const videoGameData = await d3.csv("/data/videogames_wide.csv");
-    const videoGameData2 = await d3.csv("/data/videogames_long.csv");
+    const videoGameData = await d3.csv("../data/videogames_wide.csv");
+    const videoGameData2 = await d3.csv("../data/videogames_long.csv");
     const over10mil = videoGameData.filter((item) => { return item.Global_Sales >= 10 });
     const Nintendo = videoGameData.filter((item) => { return item.Publisher === "Nintendo" });
     const Nintendo2 = videoGameData2.filter((item) => { return item.publisher === "Nintendo" });
