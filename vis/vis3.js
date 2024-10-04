@@ -85,7 +85,7 @@ async function render() {
         vl.opacity().if(selection2, vl.value(0.8)).value(0.1),
       )
       .width("container")
-      .height(400)
+      .height(500)
       .toSpec();
   
     vegaEmbed("#v2plat", v2Spec2).then((result) => {
