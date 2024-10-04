@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jess' Visualization</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/token.css">
+  </head>
+  <body>
+    <header id="header">
+      <nav class="nav-container">
+        <a href="index.html"> 
+            <img class="logo" src="/img/logo.png" alt="Logo for Jessica's Portfolio">
+        </a>
+        <div class="nav-menu" id="nav-menu">
+            <a href="/index.html" class="nav-link">About Me</a>
+            <a href="#" class="nav-link">Projects - Not Working</a>
+            <a href="/vis.html" class="nav-link">Visualization</a>
+            <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="nav-link">Resume</a>
+        </div>
+    </nav>
+  </header>
+
+  <section id="class-activity" class="section-dividers"> 
+    <h4> Amount of time I used the skytrain last week</h4>
+    <svg width="905" height="500" viewBox="0 0 905 496" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="905" height="500" fill="white"/>
+
+      <!-- Lines for the graph-->
+
+      <line x1="99" y1="470" x2="99" y2="35" style="stroke:black;stroke-width:1" />
+      <line x1="40" y1="438" x2="930" y2="438" style="stroke:black;stroke-width:1" />
+
+      <line x1="99" y1="350" x2="930" y2="350" style="stroke:rgb(146, 146, 146);stroke-width:1" />
+      <line x1="99" y1="265" x2="930" y2="265" style="stroke:rgb(146, 146, 146);stroke-width:1" />
+      <line x1="99" y1="180" x2="930" y2="180" style="stroke:rgb(146, 146, 146);stroke-width:1" />
+      <line x1="99" y1="95" x2="930" y2="95" style="stroke:rgb(146, 146, 146);stroke-width:1" />
+
+      
+      <!-- Number of times trains was used-->
+      <text x="65" y="354" font-family="Verdana" font-size="18" fill="black" text-anchor="middle">2</text>
+      <text x="65" y="269" font-family="Verdana" font-size="18" fill="black" text-anchor="middle">4</text>
+      <text x="65" y="184" font-family="Verdana" font-size="18" fill="black" text-anchor="middle">6</text>
+      <text x="65" y="99" font-family="Verdana" font-size="18" fill="black" text-anchor="middle">8</text>
+      <text x="714" y="70" font-family="Verdana" font-size="14" fill="black" text-anchor="middle">Most Usage</text>
+
+      <!-- Bar Chart-->
+      <rect x="146" y="351" width="58" height="86" fill="#D9D9D9"/>
+      <rect x="254" y="181" width="58" height="256" fill="#D9D9D9"/>
+      <rect x="362" y="266" width="58" height="171" fill="#D9D9D9"/>
+      <rect x="470" y="181" width="58" height="256" fill="#D9D9D9"/>
+      <rect x="578" y="266" width="58" height="171" fill="#D9D9D9"/>
+      <rect x="686" y="94" width="58" height="344" fill="#9EC28D"/>
+      <rect x="794" y="351" width="58" height="86" fill="#D9D9D9"/>
+      
+      <!-- Days of the week -->
+      <text x="173" y="480" font-family="Verdana" font-size="16" fill="black" text-anchor="middle">Monday</text>
+      <text x="281" y="480" font-family="Verdana" font-size="16" fill="black" text-anchor="middle">Tuesday</text>
+      <text x="390" y="480" font-family="Verdana" font-size="16" fill="black" text-anchor="middle">Wednesday</text>
+      <text x="499" y="480" font-family="Verdana" font-size="16" fill="black" text-anchor="middle">Thursday</text>
+      <text x="605" y="480" font-family="Verdana" font-size="16" fill="black" text-anchor="middle">Friday</text>
+      <text x="718" y="480" font-family="Verdana" font-size="16" fill="black" text-anchor="middle">Saturday</text>
+      <text x="824" y="480" font-family="Verdana" font-size="16" fill="black" text-anchor="middle">Sunday</text>
+      
+      </svg>
+  </section>
+
+  <section class="section-dividers">
+    <h4> SVG Art</h4>
+    <p> Image changes every 3 ish seconds :)</p> 
+    <svg id="SVGArt" width="800" height="800">
+    </svg>
+
+  </section>
+
+  <footer class="footer-container">
+    <div class="footer-nav">
+        <div class="footer-contact">
+            <a href="mailto:jac49@sfu.ca">
+                <img class="footer-icon" src="/svg/email.svg" alt="Email Icon.">
+            </a>
+            <a href="https://www.linkedin.com/in/jessica-chen">
+                <img class="footer-icon" src="/svg/linkedin.svg" alt="LinkedIn Logo.">
+            </a>
+            <a href="https://https://twitter.com/inuraee">
+                <img class="footer-icon" src="/svg/twitter.svg" alt="Twitter / X Logo.">
+            </a>
+        </div>
+        <div class="footer-links">
+            <a href="index.html" class="footer-link">About</a>
+            <a href="#" class="footer-link">Projects</a>
+            <a href="vis.html" class="footer-link">Visualization</a>
+            <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="footer-link">Resume</a>
+        </div>
+    </div>
+    <div class="footer-text">
+        <p class="footer-copyright"> Created with Imagination and Whimsy </p>
+        <p class="footer-copyright"> © 2024 Jessica Aurelle Chen </p>
+    </div>
+  </footer>
+
+  </body>
+  <script src="vis.js"></script>
+</html>

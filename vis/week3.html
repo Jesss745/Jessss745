@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite-api@5.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link rel="stylesheet" href="/css/week3.css">
+    <link rel="stylesheet" href="/css/token.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+     const options = {
+        config: {
+          // Vega-Lite default configuration
+        },
+        init: (view) => {
+          // initialize tooltip handler
+          view.tooltip(new vegaTooltip.Handler().call);
+        },
+        view: {
+          // view constructor options
+          // remove the loader if you don't want to default to vega-datasets!
+          loader: vega.loader({
+            baseURL: "https://cdn.jsdelivr.net/npm/vega-datasets@2/",
+          }),
+          renderer: "canvas",
+        },
+      };
+      // register vega and vega-lite with the API
+      vl.register(vega, vegaLite, options);
+      </script>
+  </head>
+
+  <body>
+    <header id="header">
+        <nav class="nav-container">
+            <a href="index.html"> 
+                <img class="logo" src="/img/logo.png" alt="Logo for Jessica's Portfolio">
+            </a>
+            <div class="nav-menu" id="nav-menu">
+                <a href="/index.html" class="nav-link">About Me</a>
+                <a href="#" class="nav-link">Projects - Not Working</a>
+                <a href="/vis.html" class="nav-link">Visualization</a>
+                <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="nav-link">Resume</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="week3Vis">
+    <div class="container">
+      <!-- visualization goes into this div you can create multiple divs and give them IDs -->
+      <h2> Visualization 1: Global Sales by Genre and Platform</h2>
+      <p> I've created 2 visuals to present this information. 
+      The total global sales by genre and by platform</p>
+      <div id="v1genre"> </div>
+      <div id="v1plat"> </div>
+
+      <h2> Visualization 2: Sales Over Time by Platform and Genre</h2>
+      <p> I've created 2 visuals to present this information. The sales over time by genre and by platform. <br> The lines can be clicked to highlight the trajectory for a specific genre or platform</p>
+      <div id="v2genre"> </div>
+      <div id="v2plat">  </div>
+
+      <h2> Visualization 3: Regional Sales vs. Platform</h2>
+      <p> For this one, it's technically only 1 visual but they're separated using facet :)</p>
+      <div id="v3"> </div>
+
+      <h2> Visualization 4: All About Nintendo </h2>
+      <p> Now for the highlight of this task, I decided to do a general analysis
+        of Nintendo (the game publisher) as a whole! <br> I've always been a huge fan of
+        all of their games, and they're really the only company where I actually
+        somewhat keep up with their releases. As such, I decided this is a cool opportunity
+        to just be a bit nerdy and talk about them :)</p>
+      <p> So, I'm sure we've all heard about Nintendo. Maybe even played a game or two from them. 
+        But, did you know how dominant they are in the video game industry when it comes to their sales number? <br>
+        Feel free to hover over the pie chart to see the names, genres, and units sold for that game.
+      </p>
+      <div id="v4circle"> </div>
+      <p> You can't say they're not doing well either. They have so many games that have sold more than
+        10 million units! <br>
+        Its crazy becayse Nintendo has more games that have sold 10 million units compared to the 
+        the other 5 publishers in this data COMBINED! </p>
+        <div id="v4console"> </div>
+      <p> Nintendo is unique compared to other publishers because they
+          also make their own consoles and primarily only create games that are usually (not always!)
+          only playble on those specific consoles (unless you pirate them perhaps...). </p>
+      <div id="v4bestsells"> </div>
+      <p> Nintendo definitely has a favorite genre though, and it sells really well!</p>
+      <div id="v4genre"> </div>
+      <p> Finally, here's a quick visualization on how each genre performs across regions!</p>
+      <div id="v4populargenre"> </div>
+      <p> That's all from me, thank you for joining me on this!</p>
+
+    </div>
+</section>
+
+    <footer class="footer-container">
+        <div class="footer-nav">
+            <div class="footer-contact">
+                <a href="mailto:jac49@sfu.ca">
+                    <img class="footer-icon" src="/svg/email.svg" alt="Email Icon.">
+                </a>
+                <a href="https://www.linkedin.com/in/jessica-chen">
+                    <img class="footer-icon" src="/svg/linkedin.svg" alt="LinkedIn Logo.">
+                </a>
+                <a href="https://https://twitter.com/inuraee">
+                    <img class="footer-icon" src="/svg/twitter.svg" alt="Twitter / X Logo.">
+                </a>
+            </div>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">About</a>
+                <a href="#" class="footer-link">Projects</a>
+                <a href="vis.html" class="footer-link">Visualization</a>
+                <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="footer-link">Resume</a>
+            </div>
+        </div>
+        <div class="footer-text">
+            <p class="footer-copyright"> Created with Imagination and Whimsy </p>
+            <p class="footer-copyright"> © 2024 Jessica Aurelle Chen </p>
+        </div>
+      </footer>
+  </body>
+  <script type="module" src="vis3.js"></script>
+</html>
