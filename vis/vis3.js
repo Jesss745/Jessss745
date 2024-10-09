@@ -110,14 +110,10 @@ async function render() {
         .fieldN('platform')
         .scale({
           type: 'ordinal',
-          range: [
-            '#D5A888', '#9A367E', '#52A779', '#373836',
-            '#6C362A', '#54A24B', '#9D755D', '#BAB0AC',
-            '#72B7B2', '#E45756', '#EECA3B', '#FF9DA6',
-            '#4C78A8', '#B279A2', '#F58518'
-          ]
-        })
-        .legend(null),
+          range: ['#D27D7D', '#E45756', '#FF9DA6', '#F58518', '#EECA3B', '#B279A2', '#C2AB9A', '#9D755D', '#54A24B', '#72B7B2', '#4C78A8', '#BAB0AC', '#D8B2A2', '#373836']
+
+
+        }),
       vl.facet().fieldN("sales_region").columns(1).title('Sales by region based on the top 15 best selling platforms')
     )
     .resolve({ scale: { x: "independent" } })
@@ -138,7 +134,7 @@ async function render() {
     .encode(
       vl.theta().fieldQ('Publisher').aggregate('count'),
       vl.color().fieldN('Publisher'),
-      vl.tooltip(['Name', 'Year', 'Genre', 'Global_Sales'])
+      vl.tooltip(['Name', 'Year', 'Genre', 'Global_Sales']),
     )
 
     .width("container")
@@ -157,7 +153,9 @@ async function render() {
     .encode(
       vl.x().fieldN('Year').title("Year"),
       vl.y().fieldN('Platform').title("Consoles").sort("x"),
-      vl.color().fieldN('Platform')
+      vl.color().fieldN('Platform'),
+      vl.strokeWidth().value(5),
+      vl.tooltip(['Platform'])
     )
     .width("container")
     .height(400)
@@ -213,10 +211,19 @@ async function render() {
       vl.y().fieldQ('sales_amount').title("Unit sold by million").aggregate('sum'),
       vl.x().fieldN('genre').title("Genre").sort('-y'),
       vl.facet().fieldN("sales_region").columns(1).title("Nintendo Game Genre's Popularity by Region"),
-      vl.color().fieldN('genre'),
+      vl.color()
+        .fieldN('genre')
+        .scale({
+          type: 'ordinal',
+          range: [
+            '#FF9DA6', '#F58518', '#E45756', '#EECA3B',
+            '#B279A2', '#9D755D', '#72B7B2', '#4C78A8',
+            '#54A24B', '#BAB0AC', '#6C362A', '#373836'
+          ]
+        }),
       vl.tooltip().fieldN(['genre']),
     )
-
+    .resolve({ scale: { x: "independent" } })
     .width("container")
     .height(500)
     .toSpec();
