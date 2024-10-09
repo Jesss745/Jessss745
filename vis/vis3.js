@@ -118,7 +118,7 @@ async function render() {
     )
     .resolve({ scale: { x: "independent" } })
     .width("container")
-    .height(400)
+    .height(300)
     .toSpec();
 
   vegaEmbed("#v3", v3Spec).then((result) => {
