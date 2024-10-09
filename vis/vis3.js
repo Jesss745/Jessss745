@@ -225,7 +225,7 @@ async function render() {
     )
     .resolve({ scale: { x: "independent" } })
     .width("container")
-    .height(500)
+    .height(350)
     .toSpec();
 
   vegaEmbed("#v4populargenre", v4populargenre).then((result) => {
