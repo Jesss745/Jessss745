@@ -12,7 +12,7 @@
 }
 
 #v1genre, #v1plat, #v2genre, #v2plat, #v3, #v4circle, #v4console, #v4yearly, 
-#v4bestsells, #v4genre, #v4populargenre {
+#v4bestsells, #v4genre, #v4populargenre{
     width: 100%;
     height: 100%;
     max-width: 800px;
