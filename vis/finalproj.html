@@ -12,6 +12,27 @@
   <link rel="stylesheet" href="../css/week3.css">
   <link rel="stylesheet" href="../css/token.css">
   <link rel="stylesheet" href="../css/style.css">
+  <script>
+    const options = {
+      config: {
+        // Vega-Lite default configuration
+      },
+      init: (view) => {
+        // initialize tooltip handler
+        view.tooltip(new vegaTooltip.Handler().call);
+      },
+      view: {
+        // view constructor options
+        // remove the loader if you don't want to default to vega-datasets!
+        loader: vega.loader({
+          baseURL: "https://cdn.jsdelivr.net/npm/vega-datasets@2/",
+        }),
+        renderer: "canvas",
+      },
+    };
+    // register vega and vega-lite with the API
+    vl.register(vega, vegaLite, options);
+  </script>
 </head>
 
 <body>
@@ -29,6 +50,8 @@
       </div>
     </nav>
   </header>
+
+  <h2> Analyzing the Impact of Luck-Based Draw Rates on Video Game Revenue and Popularity in 2024</h2>
 
   <footer class="footer-container">
     <div class="footer-nav">
@@ -57,6 +80,6 @@
     </div>
   </footer>
 </body>
-<script type="module" src="finalproj.js"></script>
+<script type="module" src="vis3.js"></script>
 
 </html>

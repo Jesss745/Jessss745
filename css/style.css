@@ -88,21 +88,22 @@ header {
   font-weight: 600;
   color: var(--neutral-600);
   text-decoration: none;
-  transition: 0.6s;
   padding: 0.5rem;
   border-radius: 10px;
+  background-image: linear-gradient(var(--green-300), var(--green-300)); /* Underline color */
+  background-position: 0 100%; /* Position underline at the bottom */
+  background-size: 0% 2px; /* Hidden underline initially */
+  background-repeat: no-repeat;
+  
+  transition: color 0.5s ease-in-out, background-size 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition for both color and underline */
 }
 
-.nav-link:hover {
-  border-radius: 10px;
-  color: var(--green-300);
-  font-weight: 700;
-}
-
+.nav-link:hover,
 .nav-link:focus {
-  border-radius: 10px;
-  color: var(--green-300);
+  color: var(--green-300); 
   font-weight: 700;
+  background-size: 100% 4px;
+  background-position: 0 98%;
 }
 
 p > a {
@@ -155,6 +156,14 @@ p > a:focus-visible {
 
 /* Buttons */
 
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: .5rem 0rem;
+}
+
 .blocky {
   background: var(--green-300);
   border-radius: 12px;
@@ -178,58 +187,59 @@ p > a:focus-visible {
   transform: translateY(-2px);
 }
 
-.btn-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 2rem 0rem;
+.pushable {
+  background: var(--green-500);
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+  padding-bottom: .05rem;
+  cursor: pointer;
 }
 
-.primary-btn {
-  padding: 0.3rem 0.8rem;
-  background-color: var(--green-300);
-  color: var(--neutral-white);
+.front {
+  display: block;
+  padding: .3rem 1rem;
+  border-radius: 10px;
+  font-size: .5rem;
+  background: var(--green-300);
+  color: white;
+  transform: translateY(-4px);
+}
+
+.links {
+  color: white;
+  text-decoration: none;
   font-size: 0.5rem;
   font-weight: 600;
+}
+
+.front2 {
+  display: block;
+  padding: .3rem 1rem;
   border-radius: 10px;
+  font-size: .5rem;
+  border: 2px solid var(--green-300);
+  background: var(--neutral-white);
+  transform: translateY(-4px);
+}
+
+.links2 {
+  color: var(--green-500);
+  text-decoration: none;
+  font-size: 0.5rem;
+  font-weight: 600;
+}
+
+.pushable:active .front {
+  transform: translateY(-2px);
+}
+
+.pushable:active .front2 {
+  transform: translateY(-2px);
+}
+
+.pushable:focus:not(:focus-visible) {
   outline: none;
-  text-decoration: none;
-  transition: 0.5s;
-}
-
-.primary-btn:hover {
-  background-color: var(--green-100);
-  color: var(--neutral-black);
-  padding: 0.35rem 0.9rem;
-}
-
-.primary-btn:focus {
-  background-color: var(--green-100);
-  color: var(--neutral-black);
-  padding: 0.35rem 0.9rem;
-}
-
-.secondary-btn {
-  padding: 0.3rem 0.8rem;
-  background-color: var(--neutral-white);
-  color: var(--neutral-black);
-  outline: solid 1px var(--neutral-300);
-  font-size: 0.5rem;
-  font-weight: 600;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: 0.5s;
-}
-
-.secondary-btn:hover {
-  background-color: var(--green-100);
-  padding: 0.35rem 0.9rem;
-}
-
-.secondary-btn:focus {
-  background-color: var(--green-100);
-  padding: 0.35rem 0.9rem;
 }
 
 .in-text-link {
@@ -314,20 +324,37 @@ p > a:focus-visible {
   transform: scale(1.05);
 }
 
-.overlay {
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  color: var(--neutral-white);
-  max-width: 45vw;
-  width: 100%;
-  transition: 0.5s ease;
+.product-image-block {
+  position: relative;
+}
+
+.see-more-button {
+  transition: .5s ease;
   opacity: 0;
-  font-size: 0.6rem;
-  font-weight: 600;
-  padding: 3rem 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.see-more-text {
+  background-color: var(--green-500);
+  border: 10px;
+  color: white;
+  font-size: .5rem;
+  font-weight: 600;
+  padding: .5rem 1rem;
+}
+
+.product-image-block:hover .project-image {
+  opacity: 0.3;
+  transform: scale(1.05);
+}
+
+.product-image-block:hover .see-more-button {
+  opacity: 1;
 }
 
 .section-dividers {
@@ -417,6 +444,30 @@ p > a:focus-visible {
   transform: scale(1.2);
 }
 
+.footer-link {
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-image: linear-gradient(var(--green-300), var(--green-300)); /* Underline color */
+  background-position: 0 100%; /* Position underline at the bottom */
+  background-size: 0% 2px; /* Hidden underline initially */
+  background-repeat: no-repeat;
+  
+  transition: color 0.5s ease-in-out, background-size 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition for both color and underline */
+}
+
+.footer-link:hover,
+.footer-link:focus {
+  color: var(--green-300); 
+  font-weight: 700;
+  background-size: 100% 4px;
+  background-position: 0 98%;
+}
+
+
 .footer-links {
   gap: 1rem 2rem;
   display: flex;
@@ -424,26 +475,6 @@ p > a:focus-visible {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.footer-link {
-  color: var(--neutral-900);
-  text-decoration: none;
-  transition: 0.3s;
-  margin: 0.5rem;
-  padding: 0.1rem 0.2rem;
-  align-self: center;
-  text-align: center;
-}
-
-.footer-link:hover {
-  font-weight: 600;
-  font-size: 0.6rem;
-  color: var(--green-300);
-}
-
-.footer-link:focus {
-  color: var(--accent);
 }
 
 .footer-text {

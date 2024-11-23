@@ -25,15 +25,23 @@
         <section id="about-me">
             <div class="about-me">
                 <div class="Personal-Bio">
-                    <img class="Bio-Picture" id="basePic" src="img/Works7.png" alt="Me!">
+                    <img class="Bio-Picture" src="img/Works7.png" alt="A drawing of Jess">
                     <div class="Bio-Content">
                         <h2>Hi, I'm Jess! :)</h2>
                         <p> I'm an interdisciplinary UX and Product Designer based passionate about bringing my ideas and product into reality through my experince creating illustrations and design.</p>
-                        <button class="blocky" type="button" onclick="PicChange(1)">  <span class="front"> Actual picture of me </span></button>
-                        <button class="blocky" type="button" onclick="PicChange(0)">  <span class="front"> Picture I drew of me </span> </button>
                         <div class="btn-container">
-                            <a href="#project-showcase" class="primary-btn">Projects</a>
-                            <a href="https://drive.google.com/file/d/1JYiIS35oQ02rS1vRjMLrGmRYJHG1wGGN/view?usp=sharing" class="secondary-btn">Resume</a>
+                            <button class="pushable">
+                                <span class="front">
+                                    <a href="#project-showcase" class="links"> Projects</a>
+                                </span>
+                              </button>
+    
+                              <button class="pushable">
+                                <span class="front2">
+                                    <a href="https://drive.google.com/file/d/12mtryceAKXAb-oqXpOfH9m4fQJt8gUsi/view?usp=sharing" 
+                                    class="links2">Resume</a>
+                                </span>
+                              </button>
                         </div>
                     </div>
                 </div>
@@ -48,23 +56,30 @@
 
             <h4> Design Experience </h4>
             <section id="project-showcase">
-                <div>
+                <div class="#">
                     <h4 class="h4_change"> LIVESTOCK - UX Research and Art Direction </h4>
-                    <div class="project-hover" >
-                        <a href="livestock_page.html">
-                            <img class="project-image" src="img/LIVESTOCK.png" alt="A case study of my interactive lookbook made for LIVESTOCK ">
-                        <div class="overlay">LIVESTOCK Interactive Lookbook</div>
-                        </a>
-                    </div>
+                    <a href="livestock_page.html">
+                        <div class="product-image-block">
+                            <img class="project-image" src="img/LIVESTOCK.png"
+                                alt="A case study of my interactive lookbook made for LIVESTOCK ">
+                            <div class="see-more-button">
+                                <div class="see-more-text">LIVESTOCK Interactive Lookbook</div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div>
-                    <h4 class="h4_change"> Candlelight Concert - Art Direction </h4>
-                    <div class="project-hover">
-                        <a href="candlelight_page.html">
-                            <img class="project-image" src="img/CANDLELIGHT.png" alt="A case study of a website redesign I made for Candlelight Concert">
-                            <div class="overlay">Candlelight Concert Website Redesign </div>
-                        </a>
-                    </div>
+        
+                <div class="#">
+                    <h4 class="h_change"> Candlelight Concert - Art Direction </h4>
+                    <a href="candlelight_page.html">
+                        <div class="product-image-block">
+                            <img class="project-image" src="img/CANDLELIGHT.png"
+                                alt="A case study of a website redesign I made for Candlelight Concert ">
+                            <div class="see-more-button">
+                                <div class="see-more-text">Candlelight Concert Website Redesign</div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </section>
 
