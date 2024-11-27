@@ -3,15 +3,17 @@
 
 <head>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../css/final.css">
+  <link rel="stylesheet" href="../css/week3.css">
+  <link rel="stylesheet" href="../css/token.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite-api@5.6.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-  <link rel="stylesheet" href="../css/week3.css">
-  <link rel="stylesheet" href="../css/token.css">
-  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.1"></script>
   <script>
     const options = {
       config: {
@@ -51,7 +53,96 @@
     </nav>
   </header>
 
-  <h2> Analyzing the Impact of Luck-Based Draw Rates on Video Game Revenue and Popularity in 2024</h2>
+  <section class="section-dividers">
+    <h2> Analyzing the Impact of Luck-Based Draw Rates on Video Game Revenue and Popularity in 2024</h2>
+  </section>
+
+
+  <section class="week3Vis">
+    <div class="container">
+      <p>There has been a new trend in the game industry where a lot games began introducing gacha mechanics
+        in their video game. Whether is a mechanic to give players a new weapon to help the characters
+        they're playing become stronger, or a way to get unique skins that serves no other purpose
+        than making a character look "nicer". According to the Reliable Research IQ, a premier market research firm specializing in providing high-quality data research solutions for businesses,
+        The Gacha Games market is expected to grow annually by 11.1% by 2031.
+      </p>
+        
+      <p> As a video game player myself, I have my thoughts and seen discussion online on how some players believe that 
+        gacha games serve no purpose for players except to generate profit and that companies would make 
+        abhorent gacha rates to force players to keep spending more in their games. However, this idea
+        has never really been challange and there is no clear indication on whether the drop rates of the game
+        actually affects how players spend on the game or if it is other factors that players may have not considered. </p>
+        
+      <p> As such, I will be exploring that topic today. I will be focusing on games that are available on mobile and 
+        I'll currently only be looking at how these games are performing in 2024. </p>
+
+      <p> To start I believe it's important for us to see the top 50 best selling mobile gacha games in 2024!
+        The following is a breakdown of the 45 best selling mobile gacha games in 2024 alongside a breakdown
+        of the different genre's each game falls under and what year the game was released in. 
+      </p>
+
+      <h5> Click on the pie chart / select a range from the all games list or year to filter the data shown :)</h5>
+      
+        <div id="vis1"> </div>
+
+      <p> So in 2024, 14 out of the 45 most profitable gacha games fall under the role-playing genre, 
+        which may indicate that a lot of spenders tend to prefer games in that genre. Adventure comes second with 8.
+        On top of that, at least 10 games were released in 2024. This could mean that some players are simply
+        spending to consume all the possible contents in that game as quickly as possible. It may also be
+        recency bias where players feel more inclined to spend their money to games they just begun.   
+      </p>
+
+      <p> It seems to be a linear scale in regards to when each game were released.
+        The newer the game, the more likely it is to remain on the most profitable chart. Which, again, is ikely because
+        the older the game, the more bored a player might be when playing it because they may think that
+        they've experienced everything the game has to offer.
+      </p>
+
+      <h5> So, how does the top 10 games perform each month?</h5>
+        <div id="vis2"> </div>
+      <p> While there is no specific trend, it's clear that the revenue gacha games generate
+        tend to fluctuate a lot. Some months could be way more profitable than others and the rates
+        offered by the games would not have changed. It would be the content that change. Which indicates
+        that it isn't the rates thats affected how players spend, its the content they produce. 
+      </p>
+
+      <p> Take for instance Honkai Star Rail, which had the most profit overall compared to every other game
+        on this list in March. Doing further research showed me that 2 highly anticipated characters were re-released
+        this month (Jing Yuan, 1st in the most recent anniversary popularity vote) and another character that is going to be released in 
+        late March (Archeron,  4th in the most recent anniversary popularity vote). 
+        It's very likely that this is why people ended up spending a lot of money, they wanted to either
+        get JingYuan that month, or begin saving for Archeron. 
+      </p>
+
+      <p> Take for instance Honkai Star Rail, which had the most profit overall compared to every other game
+        on this list in March. Doing further research showed me that 2 highly anticipated characters were re-released
+        this month (Jing Yuan, 1st in the most recent anniversary popularity vote) and another character that is going to be released in 
+        late March (Archeron,  4th in the most recent anniversary popularity vote). 
+        It's very likely that this is why people ended up spending a lot of money, they wanted to either
+        get JingYuan that month, or begin saving for Archeron. 
+      </p>
+
+      <img src="../img/jingyuan.png" alt="Image of the popularity survey results">
+
+      <h5> If you want to try comparing 2 games with each other, you can do so here! </h5>
+
+      <div class="dropdown-container">
+        <select id="dropdown1">
+          <option value="">Select Game 1</option>
+        </select>
+        <select id="dropdown2">
+          <option value="">Select Game 2</option>
+        </select>
+      </div>
+      <div id="vis3">  </div>
+
+      <p> However, I am still curious to see whether or not there is an overall trend with how drop rates
+        can affect the profit for various games .......  </p>
+      <div id="vis4"> Placeholder - Vis not made yet</div>
+
+      <p> insert conclussion</p>
+    </div>
+  </section>
 
   <footer class="footer-container">
     <div class="footer-nav">
@@ -80,6 +171,6 @@
     </div>
   </footer>
 </body>
-<script type="module" src="vis3.js"></script>
+<script type="module" src="finalproj.js"></script>
 
 </html>
