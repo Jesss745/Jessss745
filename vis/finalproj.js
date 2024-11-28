@@ -7,7 +7,7 @@ async function render() {
 
   ];
   const top10Games = GachaData.filter((item) => filterSet.includes(item.Title));
-
+  const GoodSales = GachaData.filter((item) => { return item.Downloads <= 3 & item.Overal_Rev <= 50 })
   const click = vl.selectPoint().encodings('color');
   const brush = vl.selectInterval().encodings('x').resolve('union');
   const brush2 = vl.selectInterval();
@@ -29,7 +29,7 @@ async function render() {
       vl.color().value('lightgray').if(click, vl.color().fieldN('Genre')),
     )
     .width("container")
-    .height(550)
+    .height(500)
     .toSpec();
 
   // Pie Chart
@@ -65,8 +65,8 @@ async function render() {
       vl.theta().fieldQ('Genre').aggregate('count').count('Title'),
       vl.color().value('lightgray').if(click, vl.color().fieldN('Genre')),
     )
-    .width(300)
-    .height(300)
+    .width(200)
+    .height(200)
     .toSpec();
 
   const combinedSpec = vl.vconcat(allSales, vl.hconcat(genreCount, yearOut)).toSpec();
@@ -130,39 +130,79 @@ async function render() {
     if (!title1 || !title2) {
       return; // No selection or invalid selections
     }
-
     // Filter data for selected titles
     const gameschecked = GachaData.filter(game => game.Title === title1 || game.Title === title2);
-
-    // Vega-Lite Spec
-    const selection = vl.selectPoint();
-    const comparedData = vl
-      .markLine()
-      .data(gameschecked)
-      .title("Sales by Month")
-      .params(selection)
-      .encode(
-        vl.x().fieldO('Month')
-          .title("Month")
-          .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
-          .axis({ labelAngle: 0 }),
-        vl.y().fieldQ('Overal_Rev').title("Total unit sold in million").aggregate('sum'),
-        vl.tooltip(['Title', 'Genre']),
-        vl.color().if(selection, vl.fieldN('Title'))
-          .value('grey')
-          .scale({ scheme: 'category20' }),
-        vl.opacity().if(selection, vl.value(0.8)).value(0.1)
-      )
-      .width("container")
-      .height(400)
-      .toSpec();
-
-    vegaEmbed("#vis3", comparedData).then((result) => {
-      const view = result.comparedData;
-      view.run();
-    });
   }
   dropdown1.addEventListener('change', updateChart);
   dropdown2.addEventListener('change', updateChart);
+
+  //Visualization 4
+  //Scatterplot
+  const scatterData = vl.markCircle({size: 50}) 
+  .data(GoodSales)
+  .transform(
+    vl.filter(click),
+    vl.filter(brush)
+  )
+  .title('Downloads vs Revenue')
+  .params(brush2)
+  .encode(
+    vl.x().fieldQ('Overal_Rev').scale({domain: [0, 50]}),
+    //vl.x().fieldQ('Overal_Rev').scale({domain: [0, 75]}),
+    //vl.y().fieldQ('Downloads').scale({domain: [0, 30]}).axis({tickCount: 5}),
+    vl.y().fieldQ('Downloads').scale({domain: [0, 3]}).axis({tickCount: 5}),
+     vl.size().fieldQ('Drop_Rates').title('Drop Rates by percentage'),
+    vl.color().value('lightgray').if(click, vl.color().fieldN('Genre').title('Movie Genres')),
+    vl.tooltip(['Title', 'Genre', 'Year_Released', 'Month', 'Review', 'Overal_Rev', 'Drop_Rates'])
+  )
+  .width("container")
+  .height(550)
+  .toSpec();
+
+// Rating bin chart
+const reviewsChart = vl.markBar() 
+  .data(GachaData)
+  .transform(
+    vl.filter(click),
+    vl.filter(brush2)
+  )
+  .title('All Game Review Rates')
+  .params(brush)
+  .encode(
+    // vl.x().fieldQ('rating').bin({step: 0.5}),
+    vl.x().fieldQ('Review').bin({step: 0.25}).scale({domain: [3.5,5]}),
+    vl.y().count().scale({domain: [0,200]}),
+  )
+  .width(450)
+  .height(400)
+  .toSpec();
+
+// Genre count chart
+const genreBreakdown = vl.markBar({tooltip: {"content": "encoding"}, clip: true})
+  .data(GachaData)
+  .transform(
+    // Aggregate to ensure unique titles are counted only once per genre
+    //vl.aggregate().groupby('Genre', 'Title'),
+    vl.filter(brush),
+    vl.filter(brush2)
+  )
+  .title('Genre Count')
+  .params(click)
+  .encode(
+    vl.x().count('Title').title('Breakdown of Game Genre'),
+    vl.y().fieldN('Genre').title('Game Genre'),
+    vl.color().value('lightgray').if(click, vl.color().fieldN('Genre'))
+  )
+  .width(400)
+  .height(400)
+    .toSpec();
+
+  const combinedVis4 = vl.vconcat(scatterData, vl.hconcat(genreBreakdown, reviewsChart)).toSpec();
+
+  vegaEmbed("#vis4", combinedVis4).then((result) => {
+    view = result.vis4;
+    view.run();
+  });
+
 }
 render();
