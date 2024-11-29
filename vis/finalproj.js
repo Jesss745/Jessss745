@@ -132,9 +132,35 @@ async function render() {
     }
     // Filter data for selected titles
     const gameschecked = GachaData.filter(game => game.Title === title1 || game.Title === title2);
+
+    const selection = vl.selectPoint();
+      const vis3Spec = vl
+        .markLine()
+        .data(gameschecked)
+        .title("Sales by Month")
+        .params(selection)
+        .encode(
+          vl.x().fieldO('Month')
+            .title("Month")
+            .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+            .axis({ labelAngle: 0 }),
+          vl.y().fieldQ('Overal_Rev').title("Total unit sold in million").aggregate('sum'),
+          vl.tooltip(['Title', 'Genre']),
+          vl.color().if(selection, vl.fieldN('Title'))
+            .value('grey')
+            .scale({ scheme: 'category20' }),
+          vl.opacity().if(selection, vl.value(0.8)).value(0.1)
+        )
+        .width("container")
+        .height(400)
+        .toSpec();
+
+      // Embed the updated chart
+      vegaEmbed("#vis3", vis3Spec).then((result) => {
+        const view = result.view;
+        view.run();
+      });
   }
-  dropdown1.addEventListener('change', updateChart);
-  dropdown2.addEventListener('change', updateChart);
 
   //Visualization 4
   //Scatterplot
@@ -203,6 +229,7 @@ const genreBreakdown = vl.markBar({tooltip: {"content": "encoding"}, clip: true}
     view = result.vis4;
     view.run();
   });
-
+  dropdown1.addEventListener('change', updateChart);
+  dropdown2.addEventListener('change', updateChart);
 }
 render();
