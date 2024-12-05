@@ -1,3 +1,26 @@
+const carousels = {
+  carousel1: { currentIndex: 0 },
+  carousel2: { currentIndex: 0 },
+};
+
+window.moveSlide = function(carouselId, direction) {
+  const carousel = carousels[carouselId];
+  const track = document.querySelector(`#${carouselId} .carousel-track`);
+  const totalItems = document.querySelectorAll(`#${carouselId} .carousel-item`).length;
+  const message = document.getElementById(`${carouselId}-message`);
+
+  carousel.currentIndex += direction;
+
+  if (carousel.currentIndex < 0) {
+    carousel.currentIndex = totalItems - 1;
+  } else if (carousel.currentIndex >= totalItems) {
+    carousel.currentIndex = 0;
+  }
+
+  const offset = -carousel.currentIndex * 100;
+  track.style.transform = `translateX(${offset}%)`;
+};
+
 async function render() {
   // load data
   const GachaData = await d3.csv("../data/GachaGames.csv");
@@ -8,7 +31,12 @@ async function render() {
   ];
   const top10Games = GachaData.filter((item) => filterSet.includes(item.Title));
   const GoodSales = GachaData.filter((item) => { return item.Downloads <= 3 & item.Overal_Rev <= 50 })
-  const click = vl.selectPoint().encodings('color');
+  const click = vl.selectPoint()
+  .encodings('color')
+  .fields("Title") 
+  .on("click")
+  .bind("legend") 
+  .toggle(true)  ;
   const brush = vl.selectInterval().encodings('x').resolve('union');
   const brush2 = vl.selectInterval();
 
@@ -29,10 +57,9 @@ async function render() {
       vl.color().value('lightgray').if(click, vl.color().fieldN('Genre')),
     )
     .width("container")
-    .height(500)
+    .height(400)
     .toSpec();
 
-  // Pie Chart
   const yearOut = vl.markBar()
     .data(GachaData)
     .transform(
@@ -51,7 +78,7 @@ async function render() {
     .height(300)
     .toSpec();
 
-  const genreCount = vl.markArc({ tooltip: { "content": "encoding" }, clip: true })
+  const genreCount = vl.markBar({ tooltip: { "content": "encoding" }, clip: true })
     .data(GachaData)
     .transform(
       vl.filter(brush),
@@ -62,14 +89,18 @@ async function render() {
     .title("Genre Breakdown")
     .params(click)
     .encode(
+      vl.x().fieldQ('Genre').aggregate('count').title("Total Games"),
+      vl.y().fieldN('Genre').axis({ labelAngle: 0 }).title(""),
       vl.theta().fieldQ('Genre').aggregate('count').count('Title'),
       vl.color().value('lightgray').if(click, vl.color().fieldN('Genre')),
     )
-    .width(200)
-    .height(200)
+    .width(300)
+    .height(300)
     .toSpec();
 
-  const combinedSpec = vl.vconcat(allSales, vl.hconcat(genreCount, yearOut)).toSpec();
+  //const combinedSpec = vl.vconcat(allSales, vl.hconcat(genreCount, yearOut)).toSpec();
+  const combinedSpec = vl.vconcat(vl.hconcat(genreCount, yearOut), allSales).toSpec();
+  
 
   vegaEmbed("#vis1", combinedSpec).then((result) => {
     const view = result.vis1;
@@ -77,7 +108,12 @@ async function render() {
   });
 
   //Vis 2 - Top 10 best selling game by months
-  const selection = vl.selectPoint();
+  const selection = vl.selectPoint()
+  .fields("Title") 
+  .on("click")
+  .bind("legend") 
+  .toggle(true); 
+
   const vis2Spec = vl
     .markLine()
     .data(top10Games)
