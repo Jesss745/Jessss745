@@ -16,7 +16,7 @@ select {
 .carousel-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
+  max-width: 100vw;
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -25,16 +25,18 @@ select {
 
 .carousel-track {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  transition: color 0.5s ease-in-out, background-size 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)
 }
 
 .carousel-item {
+  text-align: center;
   min-width: 100%;
 }
 
 .carousel-item img {
   width: 100%;
   display: block;
+  margin-bottom: .1rem;
 }
 
 .carousel-button {
@@ -44,9 +46,13 @@ select {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  padding: 10px;
+  padding: 20px;
   cursor: pointer;
   z-index: 1000;
+}
+
+.carousel-button:hover {
+  transition: .5s ease-in-out;
 }
 
 .carousel-button.prev {
@@ -59,4 +65,57 @@ select {
 
 .carousel-button:hover {
   background-color: var(--green-300);
+}
+
+.scroller {
+  height: 300px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.scroller section {
+  scroll-snap-align: start;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.introduction {
+  margin: 3rem 5rem 3rem 5rem;    
+  justify-content: center; 
+  align-items: center;     
+}
+
+.sectionIntro {    
+  height: 20vw;
+  max-width: 100%;                       
+  background-color: var(--green-500); 
+  display: flex;           
+  justify-content: center; 
+  align-items: center;     
+  color: white;        
+  margin: 0rem;               
+}
+
+.addingspace{
+  margin: 1.5rem 0;
+}
+
+.row {
+  display: flex;
+}
+
+/* Create three equal columns that sits next to each other */
+.column {
+  flex: 33.33%;
+  padding: 10px;
 }

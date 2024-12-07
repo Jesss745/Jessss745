@@ -31,36 +31,36 @@ async function render() {
   ];
   const top10Games = GachaData.filter((item) => filterSet.includes(item.Title));
   const GoodSales = GachaData.filter((item) => { return item.Downloads <= 3 & item.Overal_Rev <= 50 })
+
   const click = vl.selectPoint()
   .encodings('color')
-  .fields("Title") 
   .on("click")
   .bind("legend") 
-  .toggle(true)  ;
+   .toggle(true)
   const brush = vl.selectInterval().encodings('x').resolve('union');
   const brush2 = vl.selectInterval();
-
+  
   // Visualization 1
   // Bar Chart
-  const allSales = vl.markBar()
+  const allSales = vl.markBar() 
     .data(GachaData)
     .transform(
       vl.filter(click),
       vl.filter(brush)
     )
-    .title("Global Sales of Gacha Games in 2024")
+   .title("Global Sales of Gacha Games in 2024")
     .params(brush2)
     .encode(
       vl.x().fieldQ("Overal_Rev").aggregate("sum").title("Sales by million(s)"),
       vl.y().fieldN("Title").sort("x").title(null),
       vl.tooltip(["Overal_Rev"]).aggregate("sum"),
-      vl.color().value('lightgray').if(click, vl.color().fieldN('Genre')),
+      vl.color().fieldN("Genre").title("Game Genre") // Match colors for genres
     )
     .width("container")
-    .height(400)
+    .height(550)
     .toSpec();
 
-  const yearOut = vl.markBar()
+    const yearOut = vl.markBar() 
     .data(GachaData)
     .transform(
       vl.filter(click),
@@ -71,31 +71,30 @@ async function render() {
     .title('Years game released')
     .params(brush)
     .encode(
-      vl.y().fieldN('Year_Released').aggregate('count').title("Year Released"),
-      vl.x().fieldN('Year_Released').axis({ labelAngle: 0 }),
-    )
-    .width(300)
-    .height(300)
+     vl.y().fieldN('Year_Released').aggregate('count').title("Year Released"),
+     vl.x().fieldN('Year_Released').axis({ labelAngle: 0 }),
+)
+    .width(450)
+    .height(400)
     .toSpec();
 
-  const genreCount = vl.markBar({ tooltip: { "content": "encoding" }, clip: true })
+    const genreCount = vl.markBar({tooltip: {"content": "encoding"}, clip: true})
     .data(GachaData)
     .transform(
       vl.filter(brush),
       vl.filter(brush2),
       vl.aggregate()
-        .groupby('Genre', 'Title')
+        .groupby('Genre', 'Title') 
     )
     .title("Genre Breakdown")
-    .params(click)
+   .params(click)
     .encode(
-      vl.x().fieldQ('Genre').aggregate('count').title("Total Games"),
+       vl.x().fieldQ('Genre').aggregate('count').title("Total Games"),
       vl.y().fieldN('Genre').axis({ labelAngle: 0 }).title(""),
-      vl.theta().fieldQ('Genre').aggregate('count').count('Title'),
       vl.color().value('lightgray').if(click, vl.color().fieldN('Genre')),
     )
-    .width(300)
-    .height(300)
+    .width(400)
+    .height(400)
     .toSpec();
 
   //const combinedSpec = vl.vconcat(allSales, vl.hconcat(genreCount, yearOut)).toSpec();
@@ -269,3 +268,36 @@ const genreBreakdown = vl.markBar({tooltip: {"content": "encoding"}, clip: true}
   dropdown2.addEventListener('change', updateChart);
 }
 render();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const gachaSection = document.querySelector(".gacha_games");
+  const gachaSection2 = document.querySelector(".what_gacha");
+  const gachaSection3 = document.querySelector(".lootbox");
+
+  const observerOptions = {
+    root: null, 
+    threshold: 0.2, 
+  };
+
+  // Callback function for the observer
+  const observerCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Reveal the section when it is in view
+        entry.target.classList.add("visible");
+        entry.target.classList.remove("hidden");
+
+        // Optional: Stop observing once the section is visible
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  // Observe both sections separately
+  observer.observe(gachaSection);
+  observer.observe(gachaSection2);
+  observer.observe(gachaSection3);
+
+});
+

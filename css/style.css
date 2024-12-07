@@ -455,7 +455,6 @@ p > a:focus-visible {
   background-position: 0 100%; /* Position underline at the bottom */
   background-size: 0% 2px; /* Hidden underline initially */
   background-repeat: no-repeat;
-  
   transition: color 0.5s ease-in-out, background-size 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition for both color and underline */
 }
 

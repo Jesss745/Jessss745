@@ -53,107 +53,162 @@
     </nav>
   </header>
 
-  <section class="section-dividers">
+  <section class="introduction">
     <h2> Is the Gacha System really just a cash grab? </h2>
-    <h5> Or is someone lying to us....</h5>
+    <p> Or is someone lying to us....</p>
+  </section>
+
+  <section class="sectionIntro">
+    <h3>What is a "Gacha?"</h3>
+  </section>
+
+  <section class="section-dividers">
+    <section class="week3Vis">
+      <div class="container">
+        <section class="what_gacha addingspace hidden">
+          <h4>Definition</h4>
+          <h5>Noun - /ˈɡɑː.tʃə/</h5>
+          <p>
+            A type of computer game, especially one played on a mobile phone, in which users can pay to get a new
+            character, ability, object, etc. at random
+            (= by chance, without intentionally choosing which): Games that rely on randomized in-game transactions
+            are known as Gacha games.
+          </p>
+        </section>
+
+        <section class="gacha_games addingspace hidden">
+          <h4> There are a lot of gacha games out there!</h4>
+          <h5> Some might be very obvious...</h5>
+          <div class="carousel-container" id="carousel1">
+            <div class="carousel-track">
+              <div class="carousel-item"><img src="../img/genshinBanner.png" alt="Genshin Impact">
+                Genshin Impact, probably <i> the game people think of when they think Gacha</i>
+              </div>
+              <div class="carousel-item"><img src="../img/honkaiBanner.png" alt="Honkai Star Rail">
+                Honkai Star Rail, made by the same company that made Genshin! They have basiclaly the same gameplay
+                and gacha mechanic
+              </div>
+              <div class="carousel-item"><img src="../img/cookierunBanner.png" alt="Cookie Run">
+                Cookie Run, part of a long time franchise!
+              </div>
+              <div class="carousel-item"><img src="../img/afkBanner.png" alt="AFK Arena">
+                AFK Arena, you've probably seen an ad of this game on youtube
+              </div>
+              <div class="carousel-item"><img src="../img/pokemonBanner.png" alt="Pokemon Masters">
+                Pokemon Masters, nintendo will always find a way to make profit
+              </div>
+            </div>
+            <button class="carousel-button prev" onclick="moveSlide('carousel1', -1)">&#10094;</button>
+            <button class="carousel-button next" onclick="moveSlide('carousel1', 1)">&#10095;</button>
+          </div>
+        </section>
+
+        <section class="lootbox hidden">
+          <h5> However, any games with Lootboxes or a Card Collecting mechanic also <i> technically </i>
+            fall under gacha</h5>
+          <div class="carousel-container" id="carousel2">
+            <div class="carousel-track">
+              <div class="carousel-item"><img src="../img/leagueBanner.png" alt="League of Legends">
+                League of Legends has lootboxes where you can get skins, emotes, and many more!
+              </div>
+              <div class="carousel-item"><img src="../img/fifaBanner.png" alt="FIFA">
+                FIFA makes the players gamble to get the player cards to build stronger teams
+              </div>
+              <div class="carousel-item"><img src="../img/robloxBanner.png" alt="Roblox">
+                Some Roblox developers can include lootboxes in their games that require robux to purchase
+              </div>
+              <div class="carousel-item"><img src="../img/codBanner.png" alt="COD">
+                COD has a supply box system where players can open them to try and get rare weapons
+              </div>
+              <div class="carousel-item"><img src="../img/tcgpBanner.png" alt="Pokemon TCGP">
+                TCGP somewhat builds on how popular collecting pokemon cards are.
+                You can purchase packs in game to get rarer cards.
+              </div>
+            </div>
+            <button class="carousel-button prev" onclick="moveSlide('carousel2', -1)">&#10094;</button>
+            <button class="carousel-button next" onclick="moveSlide('carousel2', 1)">&#10095;</button>
+          </div>
+        </section>
+      </div>
+    </section>
   </section>
 
 
+  <div class="sectionIntro">
+    <h3> So, whats the issue?</h3>
+  </div>
+
   <section class="week3Vis">
-    <div class="container">
-      <section class="what_gacha">
-        <h3> Part 1 - What is Gacha?</h3>
-        <h4> Definition</h4>
-        <h5> Noun - /ˈɡɑː.tʃə/</h5>
-        <p> a type of computer game, especially one played on a mobile phone, in which users can pay to get a new
-          character, ability, object, etc. at random
-          (= by chance, without intentionally choosing which): Games that rely on randomized in-game transactions are
-          known as Gacha games</p>
-      </section>
+  <div class="container">
+      <h4> It's frustrating for players to spend a lot of money on an item that isn't guaranteed</h4>
+      <p> Generally, the gacha mechanic is introduced to a free to play game so the developers
+        could still make a profit out of it. The items that the player receive got be purely cosmetic
+        (doesn't add anything to the gameplay) or actually gives a boost for the player (more attack, new skills) </p>
 
-      <section class="gacha games">
-        <h4> There are a lot of gacha games out there!</h4>
-
-        <h5> Some might be very obvious...</h5>
-        <div class="carousel-container" id="carousel1">
-          <div class="carousel-track">
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="Genshin Impact">Genshin Impact</div>
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="Honkai Star Rail">Honkai Star Rail</div>
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="Cookie Run">Cookie Run</div>
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="AFK Arena">AFK Arena</div>
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="Pokemon Masters">Pokemon Masters</div>
+        <p> Because its not guaranteed, it creates a disparity between players who don't spend money on the game 
+          and players that do. It's also just frustrating for players to see game devs seemingly caring more about 
+          profit than the players
+        </P>
+        <div class="row">
+          <div class="column">
+            <img src="../img/comment1.png" alt="complaints" style="width:100%">
           </div>
-          <button class="carousel-button prev" onclick="moveSlide('carousel1', -1)">&#10094;</button>
-          <button class="carousel-button next" onclick="moveSlide('carousel1', 1)">&#10095;</button>
-        </div>
-
-        <h5> Any games with Lootboxes also <i> technically </i> fall under gacha</h5>
-        <div class="carousel-container" id="carousel2">
-          <div class="carousel-track">
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="League of Legends">League of Legends</div>
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="FIFA">FIFA</div>
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="Roblox">Roblox</div>
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="COD">Call of Duty</div>
-            <div class="carousel-item"><img src="../img/placeholder.png" alt="Fortnite">Fortnite</div>
+          <div class="column">
+            <img src="../img/comment2.png" alt="complaints" style="width:100%">
           </div>
-          <button class="carousel-button prev" onclick="moveSlide('carousel2', -1)">&#10094;</button>
-          <button class="carousel-button next" onclick="moveSlide('carousel2', 1)">&#10095;</button>
+          <div class="column">
+            <img src="../img/comment3.png" alt="complaints" style="width:100%">
+            <p> This one is the realest to be honest, and from 2018 too</p>
+          </div>
         </div>
-        <p> You may notice a lot of shooter / battle royale games, they're all my friends play </p>
-      </section>
-
-      <section class=""">
-    <h3> Part 2 - So, whats with all the hype?</h3>
-    <h4> Well for one, gamers LOVE to complain </h4>
-    <p>There has been a new trend in the game industry where a lot games began introducing gacha mechanics
-    in their video game. Whether is a mechanic to give players a new weapon to help the characters
-    they're playing become stronger, or a way to get unique skins that serves no other purpose
-    than making a character look " nicer". According to the Reliable Research IQ, a premier market research firm
+        
+        <p> According to the Reliable Research IQ, a premier market research firm
         specializing in providing high-quality data research solutions for businesses, The Gacha Games market is
         expected to grow annually by 11.1% by 2031. </p>
 
-        <h4> As a player though, I get it!</h4>
-        <p> As a video game player myself, I have my thoughts and seen discussion online on how some players believe
-          that
-          gacha games serve no purpose for players except to generate profit and that companies would make
-          abhorent gacha rates to force players to keep spending more in their games. However, this idea
-          has never really been challange and there is no clear indication on whether the drop rates of the game
-          actually affects how players spend on the game or if it is other factors that players may have not considered.
-        </p>
+      <h4> As a player myself, I get their frustrations!</h4>
+      <p> I have my thoughts and seen discussion online on how some players believe
+        that gacha games serve no purpose for players except to generate profit and that companies would make
+        abhorent gacha rates to force players to keep spending more in their games. However, this idea
+        has never really been challange and there is no clear indication on whether the drop rates of the game
+        actually affects how players spend on the game or if it is other factors that players may have not considered.
+      </p>
 
-        <h4> So, lets actually get into it. Is profit the only reason why companies include a gacha system?</h4>
-        <p> I will be focusing on games that are available on mobile and
-          I'll currently only be looking at how these games are performing in 2024. </p>
+      <h4> So, is profit the only reason why companies include a gacha system?</h4>
+      <p> I will be focusing on games that are available on mobile and
+        I'll currently only be looking at how these games are performing in 2024. </p>
+    </div>
+  </section>
 
-      </section>
+  <div class="sectionIntro">
+    <h3> Lets look at the Data</h3>
+  </div>
 
-      <section class="data_vis_time">
-        <h3> Lets look at the Data</h3>
-      </section>
-        <p> To start I believe it's important for us to see the top 50 best selling mobile gacha games in 2024!
-          The following is a breakdown of the 45 best selling mobile gacha games in 2024 alongside a breakdown
-          of the different genre's each game falls under and what year the game was released in.
-        </p>
+  <section class="week3Vis">
+    <div class="container">
+      <p> To start I believe it's important for us to see the top 50 best selling mobile gacha games in 2024!
+        The following is a breakdown of the 45 best selling mobile gacha games in 2024 alongside a breakdown
+        of the different genre's each game falls under and what year the game was released in.
+      </p>
+
+      <h5> Filter the data by clicking on the genre list or the years!</h5>
+
+      <div id="vis1"> </div>
 
 
-        <h5> You can filter the data by clicking on the genre list, or the years!</h5>
+      <p> So in 2024, 14 out of the 45 most profitable gacha games fall under the role-playing genre,
+        which may indicate that a lot of spenders tend to prefer games in that genre. Adventure comes second with 8.
+        On top of that, at least 10 games were released in 2024. This could mean that some players are simply
+        spending to consume all the possible contents in that game as quickly as possible. It may also be
+        recency bias where players feel more inclined to spend their money to games they just begun.
+      </p>
 
-        <div id="vis1"> </div>
-
-
-        <p> So in 2024, 14 out of the 45 most profitable gacha games fall under the role-playing genre,
-          which may indicate that a lot of spenders tend to prefer games in that genre. Adventure comes second with 8.
-          On top of that, at least 10 games were released in 2024. This could mean that some players are simply
-          spending to consume all the possible contents in that game as quickly as possible. It may also be
-          recency bias where players feel more inclined to spend their money to games they just begun.
-        </p>
-
-        <p> It seems to be a linear scale in regards to when each game were released.
-          The newer the game, the more likely it is to remain on the most profitable chart. Which, again, is ikely
-          because
-          the older the game, the more bored a player might be when playing it because they may think that
-          they've experienced everything the game has to offer.
-        </p>
+      <p> It seems to be a linear scale in regards to when each game were released.
+        The newer the game, the more likely it is to remain on the most profitable chart. Which, again, is ikely
+        because
+        the older the game, the more bored a player might be when playing it because they may think that
+        they've experienced everything the game has to offer.
+      </p>
 
       <h5> So, how does the top 10 games perform each month?</h5>
       <div id="vis2"> </div>
@@ -163,31 +218,33 @@
         that it isn't the rates thats affected how players spend, its the content they produce.
       </p>
 
-      <section> 
-      <h3> Let's look at <i> The</i> best selling game in 2024, Honkai Star Rail</h3>
-      <h4> Part 1 - So, what is Honkai Star Rail?</h4>
-      <p> Its a free-to-play role-playing gacha video game developed and 
-        published by HoYoverse. It is a turn-based game, featuring the main character, the Trailblazer, 
-        travelling across planets through the Astral Express to help and connect the worlds while resolving 
-        disasters caused by "Stellarons" and other third-parties. The game was publicly released internationally on April 26, 2023, </p>
-      
-      <p> This game is technically part of HoYoverse's previous series, Honkai. Its the fourth installment 
-        in the Honkai series so it utilizing some characters from Honkai Impact 3rd and some gameplay 
-        elements from their other very popular game, Genshin Impact.</p>
+      <section>
+        <h3> Let's look at <i> The</i> best selling game in 2024, Honkai Star Rail</h3>
+        <h4> Part 1 - So, what is Honkai Star Rail?</h4>
+        <p> Its a free-to-play role-playing gacha video game developed and
+          published by HoYoverse. It is a turn-based game, featuring the main character, the Trailblazer,
+          travelling across planets through the Astral Express to help and connect the worlds while resolving
+          disasters caused by "Stellarons" and other third-parties. The game was publicly released internationally on
+          April 26, 2023, </p>
 
-      <h4> Part 2 -  What happened in March 2024?</h4>
+        <p> This game is technically part of HoYoverse's previous series, Honkai. Its the fourth installment
+          in the Honkai series so it utilizing some characters from Honkai Impact 3rd and some gameplay
+          elements from their other very popular game, Genshin Impact.</p>
 
-      <p>2 highly anticipated characters were re-released this month (Jing Yuan, 1st in the most recent anniversary popularity vote) and another character that is going
-        to be released in late March (Archeron, 4th in the most recent anniversary popularity vote).
-        It's very likely that this is why people ended up spending a lot of money, they wanted to either
-        get JingYuan that month, or begin saving for Archeron.
-      </p>
+        <h4> Part 2 - What happened in March 2024?</h4>
 
-      <img src="../img/jingyuan.png" alt="Image of the popularity survey results">
-      <p> Here is the winner announcement post HOYOVERSE (the publisher) made for Honkai's 1st anniversarry</p>
-    </section>
+        <p>2 highly anticipated characters were re-released this month (Jing Yuan, 1st in the most recent anniversary
+          popularity vote) and another character that is going
+          to be released in late March (Archeron, 4th in the most recent anniversary popularity vote).
+          It's very likely that this is why people ended up spending a lot of money, they wanted to either
+          get JingYuan that month, or begin saving for Archeron.
+        </p>
 
-    <h3> Now, are you curious how other games compare to Honkai? (or other games!)</h3>
+        <img src="../img/jingyuan.png" alt="Image of the popularity survey results">
+        <p> Here is the winner announcement post HOYOVERSE (the publisher) made for Honkai's 1st anniversarry</p>
+      </section>
+
+      <h3> Now, are you curious how other games compare to Honkai? (or other games!)</h3>
       <h5> If you want to try comparing 2 games with each other, you can do so here! </h5>
 
       <div class="dropdown-container">
@@ -206,8 +263,17 @@
         likely to spend money on these games to catch up with more veteran players </p>
 
       <div id="vis4"> </div>
+  </section>
+</div>
 
-      <p> insert conclussion</p>
+  <div class="sectionIntro">
+    <h3> What did we learn today?</h3>
+  </div>
+
+  <section class="week3Vis">
+    <div class="container">
+      <p> tldr, its not about the gacha, its generally how attached players are to the characters</p>
+      <p> Is gacha profitable, def! </p>
       <p> Thank you for joining me on this journey!</p>
     </div>
   </section>
