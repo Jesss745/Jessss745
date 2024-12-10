@@ -301,3 +301,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const dots = document.querySelectorAll(".dot");
+  const sections = document.querySelectorAll(".sectionIntro");
+
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    section.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Add click events to dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      const sectionId = `section${index + 1}`;
+      scrollToSection(sectionId);
+    });
+  });
+
+  // Update active dot based on scroll position
+  const updateActiveDot = () => {
+    let activeIndex = -1;
+
+    sections.forEach((section, index) => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // Check if the section is in view (center of viewport)
+      if (
+        rect.top <= viewportHeight * 0.5 &&
+        rect.bottom >= viewportHeight * 0.5
+      ) {
+        activeIndex = index;
+      }
+    });
+
+    // If no section is explicitly in view, keep the current active dot
+    if (activeIndex !== -1) {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === activeIndex);
+      });
+    }
+  };
+
+  // Initialize active dot on page load
+  window.addEventListener("load", updateActiveDot);
+
+  // Update active dot on scroll
+  window.addEventListener("scroll", updateActiveDot);
+});
