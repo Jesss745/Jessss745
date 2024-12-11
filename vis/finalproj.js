@@ -24,8 +24,8 @@ window.moveSlide = function (carouselId, direction) {
 async function render() {
   // load data
   const GachaData = await d3.csv("../data/GachaGames.csv");
-  const firstPart = GachaData.filter((item) => { return item.Year_Released <= 2017})
-  const secondPart = GachaData.filter((item) => { return item.Year_Released <= 2024 & item.Year_Released >= 2018})
+  const firstPart = GachaData.filter((item) => { return item.Year_Released <= 2017 })
+  const secondPart = GachaData.filter((item) => { return item.Year_Released <= 2024 & item.Year_Released >= 2018 })
   //const GoodSales = GachaData.filter((item) => { return item.Drop_Rates >= 5 })
   const GoodSales = GachaData.filter((item) => { return item.Downloads <= 3 & item.Overal_Rev <= 50 })
   const Honkai = GachaData.filter((item) => { return item.Title === "Honkai: Star Rail" })
@@ -281,11 +281,6 @@ async function render() {
   });
   dropdown1.addEventListener('change', updateChart);
   dropdown2.addEventListener('change', updateChart);
-
-  //Vis 5
-
-
-
   //Vis 6
 
   const firstVer = vl.markPoint({ color: '#E45756CC' })
@@ -314,9 +309,22 @@ async function render() {
       vl.text().mean('Drop_Rates').format('0.2f'),
     )
 
-  const combinedVis6 = vl.layer(firstVer, secondVer, text1, text2)
+  const additionalText = vl.markText({ color: '#E45756CC', align: 'center', dy: -20, dx: 370, fontSize: 14 })
+    .data([{ text: '2012 - 2017' }])
+    .encode(
+      vl.text().fieldN('text')
+    );
+
+  const additionalText2 = vl.markText({ color: '#0E4C92', align: 'center', dy: 20, dx: 320, fontSize: 14 })
+    .data([{ text: '2018 - 2024' }])
+    .encode(
+      vl.text().fieldN('text')
+    );
+
+  const combinedVis6 = vl.layer(firstVer, secondVer, text1, text2, additionalText, additionalText2)
+    .title("Average drop rates for gacha games is higher back in 2012 - 2017")
     .width("container") // Fixed numeric width
-    .height(200)
+    .height(100)
     .toSpec();
 
   vegaEmbed("#vis6", combinedVis6).then((result) => {
@@ -324,9 +332,73 @@ async function render() {
     view.run();
   });
 
+
+  //vis 5
+  const GlobalRev = vl.markBar()
+  .data(Honkai)
+  .title("Sales by Month (Global)")
+  .encode(
+    vl.x().fieldO('Month')
+      .title("Month")
+      .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+      .axis({ labelAngle: 0 }), // Ensure horizontal orientation of labels
+    vl.y().fieldQ('Global_Rev')
+      .title("Total units sold in millions")
+      .aggregate('sum'),
+    vl.tooltip(['Title', 'Genre']),
+    vl.color().value('grey'),
+  )
+  .width(800) // Numeric value for width
+  .height(400);
+
+const jpRev = vl.markBar()
+  .data(Honkai)
+  .title("Sales by Month (Japan)")
+  .encode(
+    vl.x().fieldO('Month')
+      .title("Month")
+      .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+      .axis({ labelAngle: 0 }), // Ensure horizontal orientation of labels
+    vl.y().fieldQ('JP_Rev')
+      .title("Total units sold in millions")
+      .aggregate('sum'),
+    vl.tooltip(['Title', 'Genre']),
+    vl.color().value('grey'),
+  )
+  .width(800) // Numeric value for width
+  .height(400);
+
+const cnRev = vl.markBar()
+  .data(Honkai)
+  .title("Sales by Month (China)")
+  .encode(
+    vl.x().fieldO('Month')
+      .title("Month")
+      .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+      .axis({ labelAngle: 0 }), // Ensure horizontal orientation of labels
+    vl.y().fieldQ('CN_Rev')
+      .title("Total units sold in millions")
+      .aggregate('sum'),
+    vl.tooltip(['Title', 'Genre']),
+    vl.color().value('grey'),
+  )
+  .width(800) // Numeric value for width
+  .height(400);
+
+// Combine the three bar charts into a vertical concatenated visualization
+const combinedVisRegion = vl.vconcat(GlobalRev, jpRev, cnRev)
+  .title("Sales by Month: Global, Japan, and China")
+  .spacing(20) // Add spacing between charts
+  .toSpec(); // Call `.toSpec()` only after combining the charts
+
+// Embed the visualization into the container with id 'vis5'
+vegaEmbed("#vis5", combinedVisRegion, { renderer: 'svg', actions: false }).then((result) => {
+  const view = result.view; // Correct reference to the view
+  view.run(); // Ensure the visualization runs
+}).catch(console.error);
+
 }
 render();
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
