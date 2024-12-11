@@ -24,11 +24,9 @@ window.moveSlide = function (carouselId, direction) {
 async function render() {
   // load data
   const GachaData = await d3.csv("../data/GachaGames.csv");
-  const filterSet = ['Honkai: Star Rail', 'Naruto Mobile and', 'Monster Strike',
-    'Genshin Impact', 'Love and Deepspace', 'Fate/Grand Order', 'Dragon Ball Z Dokkan Battle',
-    'Arknights', 'Zenless Zone Zero', 'Uma Musume: Pretty Derby', 'AFK Journey'
-
-  ];
+  const firstPart = GachaData.filter((item) => { return item.Year_Released <= 2017})
+  const secondPart = GachaData.filter((item) => { return item.Year_Released <= 2024 & item.Year_Released >= 2018})
+  //const GoodSales = GachaData.filter((item) => { return item.Drop_Rates >= 5 })
   const GoodSales = GachaData.filter((item) => { return item.Downloads <= 3 & item.Overal_Rev <= 50 })
   const Honkai = GachaData.filter((item) => { return item.Title === "Honkai: Star Rail" })
 
@@ -130,7 +128,7 @@ async function render() {
       vl.y().fieldQ('Overal_Rev')
         .title("Total Unit Sold in Million")
         .aggregate('sum'),
-        vl.color().fieldO('Title').legend(null),
+      vl.color().fieldO('Title').legend(null),
       vl.opacity().value(0.3)
     )
 
@@ -192,10 +190,10 @@ async function render() {
       .params(selection)
       .encode(
         vl.x().fieldO('Month')
-          .title("Month")
+          .title("Months")
           .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
           .axis({ labelAngle: 0 }),
-        vl.y().fieldQ('Overal_Rev').title("Total unit sold in million").aggregate('sum'),
+        vl.y().fieldQ('Overal_Rev').title("Total revenue in million(s)").aggregate('sum'),
         vl.tooltip(['Title', 'Genre']),
         vl.color().if(selection, vl.fieldN('Title'))
           .value('grey')
@@ -246,7 +244,8 @@ async function render() {
     .title('All Game Review Rates')
     .params(brush)
     .encode(
-      // vl.x().fieldQ('rating').bin({step: 0.5}),
+      // vl.y().fieldN('Year_Released').aggregate('count').title("Year Released"),
+      // vl.x().fieldN('Year_Released').axis({ labelAngle: 0 }),
       vl.x().fieldQ('Review').bin({ step: 0.25 }).scale({ domain: [3.5, 5] }),
       vl.y().count().scale({ domain: [0, 200] }),
     )
@@ -282,8 +281,53 @@ async function render() {
   });
   dropdown1.addEventListener('change', updateChart);
   dropdown2.addEventListener('change', updateChart);
+
+  //Vis 5
+
+
+
+  //Vis 6
+
+  const firstVer = vl.markPoint({ color: '#E45756CC' })
+    .data(firstPart)
+    .encode(
+      vl.x().fieldQ('Drop_Rates').aggregate("average").title("DropRates"),
+    )
+
+  const secondVer = vl.markPoint({ color: '#0E4C92' })
+    .data(secondPart)
+    .encode(
+      vl.x().fieldQ('Drop_Rates').aggregate("average").title("DropRates"),
+    )
+
+  const text1 = vl.markText({ color: '#E45756CC', align: 'left', dx: 10 })
+    .data(firstPart)
+    .encode(
+      vl.x().mean('Drop_Rates'),
+      vl.text().mean('Drop_Rates').format('0.2f'),
+    )
+
+  const text2 = vl.markText({ color: '#0E4C92', align: 'left', dx: 10 })
+    .data(secondPart)
+    .encode(
+      vl.x().mean('Drop_Rates'),
+      vl.text().mean('Drop_Rates').format('0.2f'),
+    )
+
+  const combinedVis6 = vl.layer(firstVer, secondVer, text1, text2)
+    .width("container") // Fixed numeric width
+    .height(200)
+    .toSpec();
+
+  vegaEmbed("#vis6", combinedVis6).then((result) => {
+    view = result.vis6;
+    view.run();
+  });
+
 }
 render();
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const gachaSection = document.querySelector(".gacha_games");
@@ -391,9 +435,9 @@ const spec = {
     "x": {
       "field": "year",
       "type": "ordinal",
-      "title": "Year", 
+      "title": "Year",
       "axis": {
-        "labelAngle": 0 
+        "labelAngle": 0
       }
     },
     "y": {
@@ -469,7 +513,7 @@ const spec = {
     {
       "mark": {
         "type": "circle",
-        "size": 50 
+        "size": 50
       },
       "encoding": {
         "x": {
