@@ -34,6 +34,9 @@
     };
     // register vega and vega-lite with the API
     vl.register(vega, vegaLite, options);
+
+    import {plot} from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.1.7/dist/plot.min.js";
+    import "@observablehq/plot@0.1.7/dist/style.css";
   </script>
 </head>
 
@@ -166,14 +169,12 @@
 
         <h4> The gacha games market is also expected to have a compound annual growth rate of 8.8%</h4>
 
-        <div id="gachaMarketTrend"> <img src="../img/placeholder.png"> Insert vis here
-         </div>
+        <div id="gachaMarketTrend"> </div>
 
-        <p> According to the Reliable Research IQ, a premier market research firm
-          specializing in providing high-quality data research solutions for businesses, The Gacha Games market is
-          expected to grow annually by 11.1% by 2031. </p>
+        <p> The market is just going to continue growing exponetially. Since it likely to be around 985.7
+          million by 2032, its save to say that gacha games will continue getting released</p>
 
-        <h4> As a player, I get their frustrations!</h4>
+        <h4> As a player, Its frustrating dealing with gacha mechanis!</h4>
         <p> While in app purchases are not required, some games use tactics to make them appealing (timers before
           the deal runs out, a "sale" on the product). On top of that, its very easy to fall behind in these
           games compared to players who are able to spend money on the game to proceed. As such, gacha games
@@ -197,18 +198,14 @@
 
   <section class="week3Vis">
     <div class="container">
-      <h4> What are the 50 most profitale mobile games in 2024? </h4>
-      <p> The following is a breakdown of these games alongside a breakdown
-        of their genre's and what year the game was released in.
+      <h4> What are the 50 most profitale mobile games in 2024? (up until October) </h4>
+      <p> The following is a breakdown of these games alongside a breakdown of their genre's and what year the game was released in.
       </p>
 
       <h5> Filter the data by clicking on the genre list or the years!</h5>
-
       <div id="vis1"> </div>
 
-
-      <p> So in 2024, 14 out of the 45 most profitable gacha games fall under the role-playing genre,
-        which may indicate that a lot of spenders tend to prefer games in that genre. Adventure comes second with 8.
+      <p> So in 2024, 14 out of the 50 most games fall under the role-playing genre, indicating that a lot of spenders tend to prefer games in that genre.
         On top of that, at least 10 games were released in 2024. This could mean that some players are simply
         spending to consume all the possible contents in that game as quickly as possible. It may also be
         recency bias where players feel more inclined to spend their money to games they just begun.
@@ -216,12 +213,11 @@
 
       <p> It seems to be a linear scale in regards to when each game were released.
         The newer the game, the more likely it is to remain on the most profitable chart. Which, again, is ikely
-        because
-        the older the game, the more bored a player might be when playing it because they may think that
+        because the older the game, the more bored a player might be when playing it because they may think that
         they've experienced everything the game has to offer.
       </p>
 
-      <h5> So, how does the top 10 games perform each month?</h5>
+      <h5> Let's look at the best performing game in 2024</h5>
       <div id="vis2"> </div>
       <p> While there is no specific trend, it's clear that the revenue gacha games generate
         tend to fluctuate a lot. Some months could be way more profitable than others and the rates
@@ -229,9 +225,9 @@
         that it isn't the rates thats affected how players spend, its the content they produce.
       </p>
 
-      <section>
         <h3> Let's look at <i> The</i> best selling game in 2024, Honkai Star Rail</h3>
-        <h4> Part 1 - So, what is Honkai Star Rail?</h4>
+        <section>
+        <h4> Part 1 - What is Honkai Star Rail?</h4>
         <p> Its a free-to-play role-playing gacha video game developed and
           published by HoYoverse. It is a turn-based game, featuring the main character, the Trailblazer,
           travelling across planets through the Astral Express to help and connect the worlds while resolving
@@ -241,22 +237,74 @@
         <p> This game is technically part of HoYoverse's previous series, Honkai. Its the fourth installment
           in the Honkai series so it utilizing some characters from Honkai Impact 3rd and some gameplay
           elements from their other very popular game, Genshin Impact.</p>
+        </section>
 
+        <section>
         <h4> Part 2 - What happened in March 2024?</h4>
 
-        <p>2 highly anticipated characters were re-released this month (Jing Yuan, 1st in the most recent anniversary
-          popularity vote) and another character that is going
-          to be released in late March (Archeron, 4th in the most recent anniversary popularity vote).
-          It's very likely that this is why people ended up spending a lot of money, they wanted to either
-          get JingYuan that month, or begin saving for Archeron.
+        <p> Two characters were released this month. Jing Yuan and Sparkle. </p>
+          <img src="../img/marchBanner.png" alt="Banners in march">
+
+        <h4> Sparkle made her debut in this update</h4>
+        <p> With this being the first time Sparkle is released, players are more willing to spend money
+          to get her in hopes of her being the most effective characters in the update.
+        </p>
+        <img src="../img/sparkleBanner.png" alt="Image of the popularity survey results">
+
+        <h4> So, who is Jingyuan?</h4>
+
+        <p> Jingyuan is currently the most popular Honkai Star Rail character 
+          based on popularity polls held by Hoyoverse, the publisher. </p>
+        <div class="row">
+          <div class="column">
+            <img src="../img/jingyuan.png" alt="complaints" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="../img/jingyuanWin.png" alt="complaints" style="width:100%">
+          </div>
+        </div>
+
+        <h5> Theres a lot of reasons why players love him.</h5>
+        <div class="row">
+          <div class="column">
+            <img src="../img/jingyuanComment1.png" alt="complaints" style="width:100%">
+            <p> He appears a lot in stories and he's a decent character to play!</p>
+          </div>
+          <div class="column">
+            <img src="../img/jingyuanComment2.png" alt="complaints" style="width:100%">
+            <p> A lot of plays just find him attractive</p>
+          </div>
+          <div class="column">
+            <img src="../img/jingyuanComment3.png" alt="complaints" style="width:100%">
+            <p> Even during his first release, he's always been popular</p>
+          </div>
+        </div>
+
+        <p> Honkai also announced 3 characters that are going to be released in the upcoming
+          update of the game. This likely caused some players to immediately spend money to start
+          "saving" for those characters in advance.
         </p>
 
-        <img src="../img/jingyuan.png" alt="Image of the popularity survey results">
-        <p> Here is the winner announcement post HOYOVERSE (the publisher) made for Honkai's 1st anniversarry</p>
+        <h4> The character release announcment was on March 16th, 2024</h4>
+        <div class="row">
+          <div class="column">
+            <img src="../img/gallagher.png" alt="Honkai's twitter account announcing
+            Gallagher's release" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="../img/archeron.png" alt="Honkai's twitter account announcing
+            Archerons's release" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="../img/aventurine.png" alt="Honkai's twitter account announcing
+            Aventurine's release" style="width:100%">
+          </div>
+        </div>
+
       </section>
 
-      <h3> Now, are you curious how other games compare to Honkai? (or other games!)</h3>
-      <h5> If you want to try comparing 2 games with each other, you can do so here! </h5>
+      <h3> So, how does other games compare to Honkai? (or with each other)</h3>
+      <h5> Select 2 games you want to compare with each other here </h5>
 
       <div class="dropdown-container">
         <select id="dropdown1">
@@ -274,6 +322,10 @@
         likely to spend money on these games to catch up with more veteran players </p>
 
       <div id="vis4"> </div>
+
+      <h4> Finally, is it a regional thing? </h4>
+      <p> There is a believe that different regions </p>
+      <div id="vis5"> </div>
   </section>
   </div>
 

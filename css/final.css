@@ -12,6 +12,13 @@ select {
   border: 1px solid #ccc;
 }
 
+img{
+  max-width: 65vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Scoped Carousel Styles */
 .carousel-container {
   position: relative;
@@ -112,12 +119,18 @@ select {
 
 .row {
   display: flex;
+  flex-wrap: wrap;
 }
 
-/* Create three equal columns that sits next to each other */
 .column {
-  flex: 33.33%;
+  flex: 30%;
   padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .column {
+    flex: 100%;
+  }
 }
 
 .side-nav {
@@ -145,7 +158,12 @@ select {
   transition: background-color 0.3s ease;
 }
 
-.dot.active {
-  background-color: #ff5733; /* Example color for active state */
-  transition: background-color 0.3s ease;
+svg {
+  background-color: #f9f9f9;
+  margin: 20px;
+}
+
+#plot-container {
+  width: 800px;
+  height: 400px;
 }
