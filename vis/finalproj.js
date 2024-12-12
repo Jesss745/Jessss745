@@ -95,7 +95,6 @@ async function render() {
     .height(400)
     .toSpec();
 
-  //const combinedSpec = vl.vconcat(allSales, vl.hconcat(genreCount, yearOut)).toSpec();
   const combinedSpec = vl.vconcat(vl.hconcat(genreCount, yearOut), allSales).toSpec();
 
   vegaEmbed("#vis1", combinedSpec).then((result) => {
@@ -103,15 +102,15 @@ async function render() {
     view.run();
   });
 
-  //Vis 2 - Top 10 best selling game by months
+  //Vis 2
   // Honkai Chart
   const honkaiChart = vl.markLine()
-    .data(Honkai) // Replace with your actual dataset
+    .data(Honkai)
     .encode(
       vl.x().fieldO('Month')
         .title("Month")
         .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
-        .axis({ labelAngle: 0 }), // Horizontal orientation of labels
+        .axis({ labelAngle: 0 }),
       vl.y().fieldQ('Overal_Rev').title("Total Revenue (Million)").aggregate('sum'),
       vl.tooltip(['Title', 'Genre']),
       vl.color().value('red')
@@ -119,7 +118,7 @@ async function render() {
 
   // Gacha Games Chart
   const allOtherGames = vl.markLine()
-    .data(GachaData) // Replace with your actual dataset
+    .data(GachaData) 
     .encode(
       vl.x().fieldO('Month')
         .title("Month")
@@ -140,14 +139,12 @@ async function render() {
       vl.color().value('red') // Match the line color for emphasis
     );
 
-  // Combine Charts and Annotations
   const vis2Spec = vl.layer(allOtherGames, honkaiChart, annotation)
     .width("container") // Fixed numeric width
     .height(400)
     .title("Honkai's Star Rail Generated the Most Revenue in 2024")
     .toSpec();
 
-  // Render Visualization
   vegaEmbed("#vis2", vis2Spec).then((result) => {
     const view = result.view;
     view.run();
@@ -177,9 +174,8 @@ async function render() {
     const title2 = dropdown2.value;
 
     if (!title1 || !title2) {
-      return; // No selection or invalid selections
+      return; 
     }
-    // Filter data for selected titles
     const gameschecked = GachaData.filter(game => game.Title === title1 || game.Title === title2);
 
     const selection = vl.selectPoint();
@@ -204,7 +200,6 @@ async function render() {
       .height(400)
       .toSpec();
 
-    // Embed the updated chart
     vegaEmbed("#vis3", vis3Spec).then((result) => {
       const view = result.view;
       view.run();
@@ -281,8 +276,8 @@ async function render() {
   });
   dropdown1.addEventListener('change', updateChart);
   dropdown2.addEventListener('change', updateChart);
+  
   //Vis 6
-
   const firstVer = vl.markPoint({ color: '#E45756CC' })
     .data(firstPart)
     .encode(
@@ -323,7 +318,7 @@ async function render() {
 
   const combinedVis6 = vl.layer(firstVer, secondVer, text1, text2, additionalText, additionalText2)
     .title("Average drop rates for gacha games is higher back in 2012 - 2017")
-    .width("container") // Fixed numeric width
+    .width("container")
     .height(100)
     .toSpec();
 
@@ -334,68 +329,95 @@ async function render() {
 
 
   //vis 5
+const uniqueGame = [...new Set(GachaData.map(game => game.Title))];
+uniqueGame.sort();
+
+const dropdownGame = document.getElementById('dropdownMenu');
+uniqueGame.forEach(title => {
+  const option = document.createElement('option');
+  option.value = title;
+  option.textContent = title;
+  dropdownGame.appendChild(option);
+});
+
+function renderCharts(selectedTitle) {
+  const filteredData = GachaData.filter(game => game.Title === selectedTitle);
+
+  // Global Revenue Chart
   const GlobalRev = vl.markBar()
-  .data(Honkai)
-  .title("Sales by Month (Global)")
-  .encode(
-    vl.x().fieldO('Month')
-      .title("Month")
-      .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
-      .axis({ labelAngle: 0 }), // Ensure horizontal orientation of labels
-    vl.y().fieldQ('Global_Rev')
-      .title("Total units sold in millions")
-      .aggregate('sum'),
-    vl.tooltip(['Title', 'Genre']),
-    vl.color().value('grey'),
-  )
-  .width(800) // Numeric value for width
-  .height(400);
+    .data(filteredData)
+    .title(`Sales by Month (Global) for ${selectedTitle}`)
+    .encode(
+      vl.x().fieldO('Month')
+        .title("Month")
+        .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+        .axis({ labelAngle: 0 }),
+      vl.y().fieldQ('Global_Rev')
+        .title("Total units sold in millions")
+        .aggregate('sum'),
+      vl.tooltip(['Month', 'Global_Rev']),
+      vl.color().value('grey')
+    )
+    .width("container")
+    .height(300);
 
-const jpRev = vl.markBar()
-  .data(Honkai)
-  .title("Sales by Month (Japan)")
-  .encode(
-    vl.x().fieldO('Month')
-      .title("Month")
-      .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
-      .axis({ labelAngle: 0 }), // Ensure horizontal orientation of labels
-    vl.y().fieldQ('JP_Rev')
-      .title("Total units sold in millions")
-      .aggregate('sum'),
-    vl.tooltip(['Title', 'Genre']),
-    vl.color().value('grey'),
-  )
-  .width(800) // Numeric value for width
-  .height(400);
+  // JP Revenue Chart
+  const jpRev = vl.markBar()
+    .data(filteredData)
+    .title(`Sales by Month (Japan) for ${selectedTitle}`)
+    .encode(
+      vl.x().fieldO('Month')
+        .title("Month")
+        .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+        .axis({ labelAngle: 0 }),
+      vl.y().fieldQ('JP_Rev')
+        .title("Total units sold in millions")
+        .aggregate('sum'),
+      vl.tooltip(['Month', 'JP_Rev']),
+      vl.color().value('grey')
+    )
+    .width("container")
+    .height(300);
 
-const cnRev = vl.markBar()
-  .data(Honkai)
-  .title("Sales by Month (China)")
-  .encode(
-    vl.x().fieldO('Month')
-      .title("Month")
-      .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
-      .axis({ labelAngle: 0 }), // Ensure horizontal orientation of labels
-    vl.y().fieldQ('CN_Rev')
-      .title("Total units sold in millions")
-      .aggregate('sum'),
-    vl.tooltip(['Title', 'Genre']),
-    vl.color().value('grey'),
-  )
-  .width(800) // Numeric value for width
-  .height(400);
+  // CN Revenue Chart
+  const cnRev = vl.markBar()
+    .data(filteredData)
+    .title(`Sales by Month (China) for ${selectedTitle}`)
+    .encode(
+      vl.x().fieldO('Month')
+        .title("Month")
+        .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+        .axis({ labelAngle: 0 }),
+      vl.y().fieldQ('CN_Rev')
+        .title("Total units sold in millions")
+        .aggregate('sum'),
+      vl.tooltip(['Month', 'CN_Rev']),
+      vl.color().value('grey')
+    )
+    .width("container")
+    .height(300);
 
-// Combine the three bar charts into a vertical concatenated visualization
-const combinedVisRegion = vl.vconcat(GlobalRev, jpRev, cnRev)
-  .title("Sales by Month: Global, Japan, and China")
-  .spacing(20) // Add spacing between charts
-  .toSpec(); // Call `.toSpec()` only after combining the charts
+  const combinedVisRegion = vl.vconcat(GlobalRev, jpRev, cnRev)
+    .title(`Sales Breakdown for ${selectedTitle}`)
+    .spacing(20)
+    .toSpec();
 
-// Embed the visualization into the container with id 'vis5'
-vegaEmbed("#vis5", combinedVisRegion, { renderer: 'svg', actions: false }).then((result) => {
-  const view = result.view; // Correct reference to the view
-  view.run(); // Ensure the visualization runs
-}).catch(console.error);
+  vegaEmbed("#vis5", combinedVisRegion, { renderer: 'svg', actions: false })
+    .then(result => {
+      const view = result.view;
+      view.run();
+    })
+    .catch(console.error);
+}
+
+dropdownGame.addEventListener('change', (event) => {
+  const selectedTitle = event.target.value;
+  renderCharts(selectedTitle);
+});
+
+if (uniqueGame.length > 0) {
+  renderCharts(uniqueGame[0]); 
+}
 
 }
 render();
@@ -411,15 +433,12 @@ document.addEventListener("DOMContentLoaded", () => {
     threshold: 0.2,
   };
 
-  // Callback function for the observer
   const observerCallback = (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Reveal the section when it is in view
         entry.target.classList.add("visible");
         entry.target.classList.remove("hidden");
 
-        // Optional: Stop observing once the section is visible
         observer.unobserve(entry.target);
       }
     });
@@ -442,7 +461,6 @@ document.addEventListener("DOMContentLoaded", () => {
     section.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Add click events to dots
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
       const sectionId = `section${index + 1}`;
@@ -450,7 +468,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Update active dot based on scroll position
   const updateActiveDot = () => {
     let activeIndex = -1;
 
@@ -458,7 +475,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
 
-      // Check if the section is in view (center of viewport)
       if (
         rect.top <= viewportHeight * 0.5 &&
         rect.bottom >= viewportHeight * 0.5
@@ -467,7 +483,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // If no section is explicitly in view, keep the current active dot
     if (activeIndex !== -1) {
       dots.forEach((dot, index) => {
         dot.classList.toggle("active", index === activeIndex);
@@ -475,10 +490,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Initialize active dot on page load
   window.addEventListener("load", updateActiveDot);
 
-  // Update active dot on scroll
   window.addEventListener("scroll", updateActiveDot);
 });
 
@@ -495,7 +508,7 @@ const marketData = [
   { year: 2032, market_size: 461.4 * (1 + 0.088) ** 9 }
 ];
 
-// Vega-Lite specification for the area chart
+// Vis for cgpa growth
 const spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "The Global Gacha Games Market Grows Exponentially (2023-2032)",
@@ -527,7 +540,6 @@ const spec = {
   "width": "container",
   "height": 400,
 
-  // Layer for the area chart and labels with circles
   "layer": [
     {
       "mark": "area",
@@ -606,5 +618,4 @@ const spec = {
   ]
 };
 
-// Embed the Vega-Lite visualization into the chart div
 vegaEmbed('#gachaMarketTrend', spec);
