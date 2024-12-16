@@ -1,6 +1,9 @@
 const carousels = {
   carousel1: { currentIndex: 0 },
   carousel2: { currentIndex: 0 },
+  carousel3: { currentIndex: 0 },
+  carousel4: { currentIndex: 0 },
+  carousel5: { currentIndex: 0 },
 };
 
 window.moveSlide = function (carouselId, direction) {
@@ -38,6 +41,11 @@ async function render() {
   const brush = vl.selectInterval().encodings('x').resolve('union');
   const brush2 = vl.selectInterval();
 
+  const containerElement = document.querySelector('.container');
+  const halfContainerWidth = containerElement.offsetWidth / 2.6;
+  const vis5ContainerWidth = containerElement.offsetWidth / 1.8;
+  const vis52ContainerWidth = containerElement.offsetWidth / 3.8;
+
   // Visualization 1
   // Bar Chart
   const allSales = vl.markBar()
@@ -52,7 +60,7 @@ async function render() {
       vl.x().fieldQ("Overal_Rev").aggregate("sum").title("Sales by million(s)"),
       vl.y().fieldN("Title").sort("x").title(null),
       vl.tooltip(["Overal_Rev"]).aggregate("sum"),
-      vl.color().fieldN("Genre").title("Game Genre") // Match colors for genres
+      vl.color().fieldN("Genre").title("Game Genre").legend(null) // Match colors for genres
     )
     .width("container")
     .height(550)
@@ -72,7 +80,7 @@ async function render() {
       vl.y().fieldN('Year_Released').aggregate('count').title("Year Released"),
       vl.x().fieldN('Year_Released').axis({ labelAngle: 0 }),
     )
-    .width(450)
+    .width(halfContainerWidth)
     .height(400)
     .toSpec();
 
@@ -91,7 +99,7 @@ async function render() {
       vl.y().fieldN('Genre').axis({ labelAngle: 0 }).title(""),
       vl.color().value('lightgray').if(click, vl.color().fieldN('Genre')),
     )
-    .width(400)
+    .width(halfContainerWidth)
     .height(400)
     .toSpec();
 
@@ -118,7 +126,7 @@ async function render() {
 
   // Gacha Games Chart
   const allOtherGames = vl.markLine()
-    .data(GachaData) 
+    .data(GachaData)
     .encode(
       vl.x().fieldO('Month')
         .title("Month")
@@ -127,8 +135,11 @@ async function render() {
       vl.y().fieldQ('Overal_Rev')
         .title("Total Unit Sold in Million")
         .aggregate('sum'),
-      vl.color().fieldO('Title').legend(null),
-      vl.opacity().value(0.3)
+      //vl.color().fieldO('Title').legend(null),
+      vl.color().fieldO('Title')
+        .scale({ range: ['#d9d9d9', '#bdbdbd'] }) // Custom shades of gray
+        .legend(null),
+      vl.opacity().value(0.5)
     )
 
   // Annotation for March
@@ -142,7 +153,7 @@ async function render() {
   const vis2Spec = vl.layer(allOtherGames, honkaiChart, annotation)
     .width("container") // Fixed numeric width
     .height(400)
-    .title("Honkai's Star Rail Generated the Most Revenue in 2024")
+    .title("Overall, Honkai Generated the Most Revenue in 2024")
     .toSpec();
 
   vegaEmbed("#vis2", vis2Spec).then((result) => {
@@ -168,13 +179,15 @@ async function render() {
     dropdown2.appendChild(option2);
   });
 
+  dropdown1.value = "Honkai: Star Rail";
+
   // Function to update the chart based on selected titles
   function updateChart() {
     const title1 = dropdown1.value;
     const title2 = dropdown2.value;
 
     if (!title1 || !title2) {
-      return; 
+      return;
     }
     const gameschecked = GachaData.filter(game => game.Title === title1 || game.Title === title2);
 
@@ -222,7 +235,7 @@ async function render() {
       //vl.y().fieldQ('Downloads').scale({domain: [0, 30]}).axis({tickCount: 5}),
       vl.y().fieldQ('Downloads').scale({ domain: [0, 3] }).axis({ tickCount: 5 }),
       vl.size().fieldQ('Drop_Rates').title('Drop Rates by percentage'),
-      vl.color().value('lightgray').if(click, vl.color().fieldN('Genre').title('Movie Genres')),
+      vl.color().value('lightgray').legend(null).if(click, vl.color().fieldN('Genre').title('Movie Genres')),
       vl.tooltip(['Title', 'Genre', 'Year_Released', 'Month', 'Review', 'Overal_Rev', 'Drop_Rates'])
     )
     .width("container")
@@ -244,7 +257,7 @@ async function render() {
       vl.x().fieldQ('Review').bin({ step: 0.25 }).scale({ domain: [3.5, 5] }),
       vl.y().count().scale({ domain: [0, 200] }),
     )
-    .width(450)
+    .width(halfContainerWidth)
     .height(400)
     .toSpec();
 
@@ -260,11 +273,11 @@ async function render() {
     .title('Genre Count')
     .params(click)
     .encode(
-      vl.x().count('Title').title('Breakdown of Game Genre'),
-      vl.y().fieldN('Genre').title('Game Genre'),
-      vl.color().value('lightgray').if(click, vl.color().fieldN('Genre'))
+      vl.x().count('Title').title('Total games in that Genre'),
+      vl.y().fieldN('Genre'),
+      vl.color().value('lightgray').legend(null).if(click, vl.color().fieldN('Genre'))
     )
-    .width(400)
+    .width(halfContainerWidth)
     .height(400)
     .toSpec();
 
@@ -276,161 +289,252 @@ async function render() {
   });
   dropdown1.addEventListener('change', updateChart);
   dropdown2.addEventListener('change', updateChart);
+
+  // Vis 6
+  const range1 = vl.layer(
+    // Main range line
+    vl.markRule({ color: '#E45756CC' })
+      .data(firstPart)
+      .encode(
+        vl.x().fieldQ('Drop_Rates').aggregate('min'),
+        vl.x2().fieldQ('Drop_Rates').aggregate('max'),
+        vl.y().value(75)
+      ),
+
+    vl.markPoint({ color: '#E45756', size: 10 })
+      .data(firstPart)
+      .encode(
+        vl.x().fieldQ('Drop_Rates').aggregate('min'),
+        vl.y().value(75)
+      ),
+
+    vl.markPoint({ color: '#E45756', size: 10 })
+      .data(firstPart)
+      .encode(
+        vl.x().fieldQ('Drop_Rates').aggregate('max'),
+        vl.y().value(75)
+      )
+  );
   
-  //Vis 6
+  const range2 = vl.layer(
+
+    vl.markRule({ color: '#0E4C92' })
+      .data(secondPart)
+      .encode(
+        vl.x().fieldQ('Drop_Rates').aggregate('min'),
+        vl.x2().fieldQ('Drop_Rates').aggregate('max'),
+        vl.y().value(30)
+      ),
+
+    vl.markPoint({ color: '#0E4C92', size: 10 })
+      .data(secondPart)
+      .encode(
+        vl.x().fieldQ('Drop_Rates').aggregate('min'),
+        vl.y().value(30)
+      ),
+
+    vl.markPoint({ color: '#0E4C92', size: 10 })
+      .data(secondPart)
+      .encode(
+        vl.x().fieldQ('Drop_Rates').aggregate('max'),
+        vl.y().value(30)
+      )
+  );
+
   const firstVer = vl.markPoint({ color: '#E45756CC' })
     .data(firstPart)
     .encode(
-      vl.x().fieldQ('Drop_Rates').aggregate("average").title("DropRates"),
-    )
+      vl.x().fieldQ('Drop_Rates').aggregate('mean').title("Drop Rates"),
+      vl.y().value(75)
+    );
 
   const secondVer = vl.markPoint({ color: '#0E4C92' })
     .data(secondPart)
     .encode(
-      vl.x().fieldQ('Drop_Rates').aggregate("average").title("DropRates"),
-    )
+      vl.x().fieldQ('Drop_Rates').aggregate('mean').title("Drop Rates"),
+      vl.y().value(30)
+    );
 
-  const text1 = vl.markText({ color: '#E45756CC', align: 'left', dx: 10 })
+  const text1 = vl.markText({ color: '#E45756CC', align: 'left' })
     .data(firstPart)
     .encode(
       vl.x().mean('Drop_Rates'),
       vl.text().mean('Drop_Rates').format('0.2f'),
-    )
+      vl.y().value(65)
+    );
 
-  const text2 = vl.markText({ color: '#0E4C92', align: 'left', dx: 10 })
+  // Text for the mean value of secondPart
+  const text2 = vl.markText({ color: '#0E4C92', align: 'left' })
     .data(secondPart)
     .encode(
       vl.x().mean('Drop_Rates'),
       vl.text().mean('Drop_Rates').format('0.2f'),
-    )
+      vl.y().value(20),
 
-  const additionalText = vl.markText({ color: '#E45756CC', align: 'center', dy: -20, dx: 370, fontSize: 14 })
-    .data([{ text: '2012 - 2017' }])
-    .encode(
-      vl.text().fieldN('text')
     );
 
-  const additionalText2 = vl.markText({ color: '#0E4C92', align: 'center', dy: 20, dx: 320, fontSize: 14 })
-    .data([{ text: '2018 - 2024' }])
+  // Additional labels for the time periods
+  const additionalText = vl.markText({ color: '#E45756CC', align: 'center', fontSize: 14 })
+    .data([{ text: 'Games Released Between 2012 - 2017' }])
     .encode(
-      vl.text().fieldN('text')
+      vl.text().fieldN('text'),
+      vl.y().value(65),
+      vl.x().value(630)
     );
 
-  const combinedVis6 = vl.layer(firstVer, secondVer, text1, text2, additionalText, additionalText2)
-    .title("Average drop rates for gacha games is higher back in 2012 - 2017")
+  const additionalText2 = vl.markText({
+    color: '#0E4C92', align: 'center', fontSize: 14
+  })
+    .data([{ text: 'Games Released Between 2018 - 2024' }])
+    .encode(
+      vl.text().fieldN('text'),
+      vl.y().value(20),
+      vl.x().value(510)
+    );
+
+  // Combine all layers
+  const combinedVis6 = vl.layer(range1, range2, firstVer, secondVer, text1, text2, additionalText, additionalText2
+  )
+    .title("Average Drop Rates for Gacha Games (2012 - 2024)")
     .width("container")
     .height(100)
     .toSpec();
 
+  // Render the visualization
   vegaEmbed("#vis6", combinedVis6).then((result) => {
-    view = result.vis6;
+    view = result.view;
     view.run();
   });
 
-
   //vis 5
-const uniqueGame = [...new Set(GachaData.map(game => game.Title))];
-uniqueGame.sort();
+  const uniqueGame = [...new Set(GachaData.map(game => game.Title))];
+  uniqueGame.sort();
 
-const dropdownGame = document.getElementById('dropdownMenu');
-uniqueGame.forEach(title => {
-  const option = document.createElement('option');
-  option.value = title;
-  option.textContent = title;
-  dropdownGame.appendChild(option);
-});
+  const dropdownGame = document.getElementById('dropdownMenu');
+  uniqueGame.forEach(title => {
+    const option = document.createElement('option');
+    option.value = title;
+    option.textContent = title;
+    dropdownGame.appendChild(option);
+  });
 
-function renderCharts(selectedTitle) {
-  const filteredData = GachaData.filter(game => game.Title === selectedTitle);
+  function renderCharts(selectedTitle) {
+    const filteredData = GachaData.filter(game => game.Title === selectedTitle);
 
-  // Global Revenue Chart
-  const GlobalRev = vl.markBar()
-    .data(filteredData)
-    .title(`Sales by Month (Global) for ${selectedTitle}`)
-    .encode(
-      vl.x().fieldO('Month')
-        .title("Month")
-        .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
-        .axis({ labelAngle: 0 }),
-      vl.y().fieldQ('Global_Rev')
-        .title("Total units sold in millions")
-        .aggregate('sum'),
-      vl.tooltip(['Month', 'Global_Rev']),
-      vl.color().value('grey')
-    )
-    .width("container")
-    .height(300);
+    const stackedData = filteredData.flatMap(game => [
+      { Month: game.Month, Region: 'Global', Revenue: game.Global_Rev || 0 },
+      { Month: game.Month, Region: 'Japan', Revenue: game.JP_Rev || 0 },
+      { Month: game.Month, Region: 'China', Revenue: game.CN_Rev || 0 }
+    ]);
 
-  // JP Revenue Chart
-  const jpRev = vl.markBar()
-    .data(filteredData)
-    .title(`Sales by Month (Japan) for ${selectedTitle}`)
-    .encode(
-      vl.x().fieldO('Month')
-        .title("Month")
-        .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
-        .axis({ labelAngle: 0 }),
-      vl.y().fieldQ('JP_Rev')
-        .title("Total units sold in millions")
-        .aggregate('sum'),
-      vl.tooltip(['Month', 'JP_Rev']),
-      vl.color().value('grey')
-    )
-    .width("container")
-    .height(300);
+    // Calculate total revenue by region for the selected game
+    const totalSalesByRegion = {
+      Global: filteredData.reduce((sum, game) => sum + (game.Global_Rev || 0), 0),
+      Japan: filteredData.reduce((sum, game) => sum + (game.JP_Rev || 0), 0),
+      China: filteredData.reduce((sum, game) => sum + (game.CN_Rev || 0), 0)
+    };
 
-  // CN Revenue Chart
-  const cnRev = vl.markBar()
-    .data(filteredData)
-    .title(`Sales by Month (China) for ${selectedTitle}`)
-    .encode(
-      vl.x().fieldO('Month')
-        .title("Month")
-        .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
-        .axis({ labelAngle: 0 }),
-      vl.y().fieldQ('CN_Rev')
-        .title("Total units sold in millions")
-        .aggregate('sum'),
-      vl.tooltip(['Month', 'CN_Rev']),
-      vl.color().value('grey')
-    )
-    .width("container")
-    .height(300);
+    // Determine the region with the highest total revenue
+    const maxRegion = Object.entries(totalSalesByRegion)
+      .reduce((max, entry) => (entry[1] > max[1] ? entry : max))[0];
 
-  const combinedVisRegion = vl.vconcat(GlobalRev, jpRev, cnRev)
-    .title(`Sales Breakdown for ${selectedTitle}`)
-    .spacing(20)
-    .toSpec();
+    const regionColors = {
+      Global: maxRegion === "Global" ? '#FB4444' : '#cccccc',
+      Japan: maxRegion === "Japan" ? '#4C78A8' : '#B4B4B4',
+      China: maxRegion === "China" ? '#FBBD44' : '#A4A4A4'
+    };
 
-  vegaEmbed("#vis5", combinedVisRegion, { renderer: 'svg', actions: false })
-    .then(result => {
-      const view = result.view;
-      view.run();
-    })
-    .catch(console.error);
-}
+    const stackedChart = vl.markBar()
+      .data(stackedData)
+      .title(`Revenue Breakdown by Region for ${selectedTitle}`)
+      .encode(
+        vl.x().fieldO('Month')
+          .title("Month")
+          .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+          .axis({ labelAngle: 0 }),
+        vl.y().fieldQ('Revenue')
+          .title("Revenue (in millions)")
+          .aggregate('sum'),
+        vl.color().fieldN('Region')
+          .title("Region")
+          .scale({
+            domain: ['Global', 'Japan', 'China'],
+            range: [regionColors.Global, regionColors.Japan, regionColors.China]
+          }),
+        vl.tooltip(['Month', 'Region', 'Revenue'])
+      )
+      .width(vis5ContainerWidth)
+      .height(500);
 
-dropdownGame.addEventListener('change', (event) => {
-  const selectedTitle = event.target.value;
-  renderCharts(selectedTitle);
-});
+    // Calculate counts for the region-max chart
+    const regionCounts = { Global: 0, Japan: 0, China: 0 };
+    uniqueGame.forEach(title => {
+      const gameData = GachaData.filter(game => game.Title === title);
+      const totalRevenue = {
+        Global: gameData.reduce((sum, game) => sum + (game.Global_Rev || 0), 0),
+        Japan: gameData.reduce((sum, game) => sum + (game.JP_Rev || 0), 0),
+        China: gameData.reduce((sum, game) => sum + (game.CN_Rev || 0), 0)
+      };
 
-if (uniqueGame.length > 0) {
-  renderCharts(uniqueGame[0]); 
-}
+      const highestRegion = Object.entries(totalRevenue)
+        .reduce((max, entry) => (entry[1] > max[1] ? entry : max))[0];
+      regionCounts[highestRegion]++;
+    });
+
+    // Prepare data for the region-max bar chart
+    const regionMaxRevenueData = [
+      { Region: 'Global', Count: regionCounts.Global },
+      { Region: 'Japan', Count: regionCounts.Japan },
+      { Region: 'China', Count: regionCounts.China }
+    ];
+
+    const regionMaxChart = vl.markBar()
+      .data(regionMaxRevenueData)
+      .title("Which Region Generally Had the Most Revenue")
+      .encode(
+        vl.y().fieldN('Region').title(""),
+        vl.x().fieldQ('Count').title("Count"),
+        vl.color().fieldN('Region')
+          .scale({
+            domain: ['Global', 'Japan', 'China'],
+            range: ['#FB4444', '#4C78A8', '#FBBD44']
+          }),
+        vl.tooltip(['Region', 'Count'])
+      )
+      .width(vis52ContainerWidth)
+      .height(200);
+
+    const combinedVis = vl.hconcat(stackedChart, regionMaxChart)
+      .spacing(20)
+      .toSpec();
+
+    vegaEmbed("#vis5", combinedVis, { renderer: 'svg', actions: false })
+      .then(result => {
+        const view = result.view;
+        view.run();
+      })
+      .catch(console.error);
+  }
+
+  dropdownGame.addEventListener('change', (event) => {
+    const selectedTitle = event.target.value;
+    renderCharts(selectedTitle);
+  });
+
+  if (uniqueGame.length > 0) {
+    renderCharts(uniqueGame[0]);
+  }
 
 }
 render();
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  const gachaSection = document.querySelector(".gacha_games");
-  const gachaSection2 = document.querySelector(".what_gacha");
-  const gachaSection3 = document.querySelector(".lootbox");
+  const sections = document.querySelectorAll(".observe-section");
 
   const observerOptions = {
-    root: null,
-    threshold: 0.2,
+    root: null, 
+    threshold: 0.1,
   };
 
   const observerCallback = (entries, observer) => {
@@ -439,17 +543,13 @@ document.addEventListener("DOMContentLoaded", () => {
         entry.target.classList.add("visible");
         entry.target.classList.remove("hidden");
 
-        observer.unobserve(entry.target);
+        observer.unobserve(entry.target); // Stop observing once it's visible
       }
     });
   };
 
   const observer = new IntersectionObserver(observerCallback, observerOptions);
-  // Observe both sections separately
-  observer.observe(gachaSection);
-  observer.observe(gachaSection2);
-  observer.observe(gachaSection3);
-
+  sections.forEach((section) => observer.observe(section));
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -528,7 +628,7 @@ const spec = {
     "y": {
       "field": "market_size",
       "type": "quantitative",
-      "title": "Market Size (USD Million)",
+      "title": "Market Size (USD Million)"
     },
     "color": {
       "value": "lightblue"
@@ -539,7 +639,6 @@ const spec = {
   },
   "width": "container",
   "height": 400,
-
   "layer": [
     {
       "mark": "area",
@@ -563,38 +662,6 @@ const spec = {
       }
     },
     {
-      "mark": "text",
-      "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal",
-          "title": "Year",
-        },
-        "y": {
-          "field": "market_size",
-          "type": "quantitative",
-          "title": "Market Size (USD Million)",
-        },
-        "text": {
-          "field": "market_size",
-          "type": "quantitative",
-          "format": ".1f"
-        },
-        "color": {
-          "value": "black"
-        },
-        "align": {
-          "value": "center"
-        },
-        "baseline": {
-          "value": "bottom"
-        },
-        "fontSize": {
-          "value": 12
-        }
-      }
-    },
-    {
       "mark": {
         "type": "circle",
         "size": 50
@@ -603,16 +670,20 @@ const spec = {
         "x": {
           "field": "year",
           "type": "ordinal",
-          "title": "Year",
+          "title": "Year"
         },
         "y": {
           "field": "market_size",
           "type": "quantitative",
-          "title": "Market Size (USD Million)",
+          "title": "Market Size (USD Million)"
         },
         "color": {
           "value": "black"
-        }
+        },
+        "tooltip": [ 
+          { "field": "year", "type": "ordinal", "title": "Year" },
+          { "field": "market_size", "type": "quantitative", "title": "Market Size (USD Million)", "format": ".1f" }
+        ]
       }
     }
   ]

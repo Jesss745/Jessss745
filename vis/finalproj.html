@@ -17,25 +17,21 @@
   <script>
     const options = {
       config: {
-        // Vega-Lite default configuration
       },
       init: (view) => {
-        // initialize tooltip handler
         view.tooltip(new vegaTooltip.Handler().call);
       },
       view: {
-        // view constructor options
-        // remove the loader if you don't want to default to vega-datasets!
         loader: vega.loader({
           baseURL: "https://cdn.jsdelivr.net/npm/vega-datasets@2/",
         }),
         renderer: "canvas",
       },
     };
-    // register vega and vega-lite with the API
+
     vl.register(vega, vegaLite, options);
 
-    import {plot} from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.1.7/dist/plot.min.js";
+    import { plot } from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.1.7/dist/plot.min.js";
     import "@observablehq/plot@0.1.7/dist/style.css";
   </script>
 </head>
@@ -57,8 +53,8 @@
   </header>
 
   <section class="introduction">
-    <h2> Is the Gacha System really just a cash grab? </h2>
-    <p> Or is someone lying to us....</p>
+    <h2> Does Games Purposely Have <s>Shit</s> Bad Drop Rates for Their Gacha Systems to Profit off Their Players? </h2>
+    <h5> But, is it really cause of the drop rates? </h5>
   </section>
 
   <section id="section1">
@@ -69,7 +65,7 @@
     <div class="section-dividers">
       <div class="week3Vis">
         <div class="container">
-          <div class="what_gacha addingspace hidden">
+          <div class="observe-section what_gacha addingspace hidden">
             <h4>Definition</h4>
             <h5>Noun - /ˈɡɑː.tʃə/</h5>
             <p>
@@ -80,26 +76,27 @@
             </p>
           </div>
 
-          <div class="gacha_games addingspace hidden">
+          <div class="observe-section gacha_games addingspace hidden">
             <h4> There are a lot of gacha games out there!</h4>
             <h5> Some might be very obvious...</h5>
             <div class="carousel-container" id="carousel1">
               <div class="carousel-track">
                 <div class="carousel-item"><img src="../img/genshinBanner.png" alt="Genshin Impact">
-                  Genshin Impact, probably <i> the game people think of when they think Gacha</i>
+                  <h5> Genshin Impact, probably <i> the </i> game people think of when they think Gacha </h5>
                 </div>
                 <div class="carousel-item"><img src="../img/honkaiBanner.png" alt="Honkai Star Rail">
-                  Honkai Star Rail, made by the same company that made Genshin! They have basically the same gameplay
-                  and gacha mechanic
+                  <h5> Honkai Star Rail, made by the same company that made Genshin! They have basically the same
+                    gameplay
+                    and gacha mechanic</h5>
                 </div>
                 <div class="carousel-item"><img src="../img/cookierunBanner.png" alt="Cookie Run">
-                  Cookie Run, part of a long time franchise!
+                  <h5> Cookie Run, part of a long time franchise! Their first game was released maybe 15 years ago</h5>
                 </div>
                 <div class="carousel-item"><img src="../img/afkBanner.png" alt="AFK Arena">
-                  AFK Arena, you've probably seen an ad of this game on youtube
+                  <h5> AFK Arena, you've probably seen an ad of this game on youtube </h5>
                 </div>
                 <div class="carousel-item"><img src="../img/pokemonBanner.png" alt="Pokemon Masters">
-                  Pokemon Masters, nintendo will always find a way to make profit
+                  <h5> Pokemon Masters, nintendo will always find a way to make profit</h5>
                 </div>
               </div>
               <button class="carousel-button prev" onclick="moveSlide('carousel1', -1)">&#10094;</button>
@@ -107,26 +104,26 @@
             </div>
           </div>
 
-          <div class="lootbox hidden">
+          <div class="observe-section lootbox hidden">
             <h5> However, any games with Lootboxes or a Card Collecting mechanic also <i> technically </i>
               fall under gacha</h5>
             <div class="carousel-container" id="carousel2">
               <div class="carousel-track">
                 <div class="carousel-item"><img src="../img/leagueBanner.png" alt="League of Legends">
-                  League of Legends has lootboxes where you can get skins, emotes, and many more!
+                  <h5> League of Legends has lootboxes where you can get skins, emotes, and many more!</h5>
                 </div>
                 <div class="carousel-item"><img src="../img/fifaBanner.png" alt="FIFA">
-                  FIFA makes the players gamble to get the player cards to build stronger teams
+                  <h5> FIFA makes the players gamble to get the player cards to build stronger teams</h5>
                 </div>
                 <div class="carousel-item"><img src="../img/robloxBanner.png" alt="Roblox">
-                  Some Roblox developers can include lootboxes in their games that require robux to purchase
+                  <h5> Some Roblox developers can include lootboxes in their games that require robux to purchase</h5>
                 </div>
                 <div class="carousel-item"><img src="../img/codBanner.png" alt="COD">
-                  COD has a supply box system where players can open them to try and get rare weapons
+                  <h5> COD has a supply box system where players can open them to try and get rare weapons</h5>
                 </div>
                 <div class="carousel-item"><img src="../img/tcgpBanner.png" alt="Pokemon TCGP">
-                  TCGP somewhat builds on how popular collecting pokemon cards are.
-                  You can purchase packs in game to get rarer cards.
+                  <h5> TCGP somewhat builds on how popular collecting pokemon cards are.
+                    You can purchase packs in game to get rarer cards.</h5>
                 </div>
               </div>
               <button class="carousel-button prev" onclick="moveSlide('carousel2', -1)">&#10094;</button>
@@ -145,27 +142,31 @@
 
     <div class="week3Vis">
       <div class="container">
-        <h4> It's frustrating for players to spend a lot of money on an item that isn't guaranteed</h4>
-        <p> Generally, the gacha mechanic is introduced to a free to play game so the developers
-          could still make a profit out of it. The items that the player receive got be purely cosmetic
-          (doesn't add anything to the gameplay) or actually gives a boost for the player (more attack, new skills) </p>
+        <div class="observe-section issuesArise hidden">
+          <h4> It's frustrating for players to spend a lot of money on an item that isn't guaranteed</h4>
+          <p> Generally, the gacha mechanic is introduced to a free to play game so the developers
+            could still make a profit out of it. The items that the player receive got be purely cosmetic
+            (doesn't add anything to the gameplay) or actually gives a boost for the player (more attack, new skills)
+          </p>
 
-        <p> Because its not guaranteed, it creates a disparity between players who don't spend money on the game
-          and players that do. It's also just frustrating for players to see game devs seemingly caring more about
-          profit than the players
-        </P>
-        <div class="row">
-          <div class="column">
-            <img src="../img/comment1.png" alt="complaints" style="width:100%">
-          </div>
-          <div class="column">
-            <img src="../img/comment2.png" alt="complaints" style="width:100%">
-          </div>
-          <div class="column">
-            <img src="../img/comment3.png" alt="complaints" style="width:100%">
-            <p> This has always been an issue! It stands true today too</p>
+          <p> Because its not guaranteed, it creates a disparity between players who don't spend money on the game
+            and players that do. It's also just frustrating for players to see game devs seemingly caring more about
+            profit than the players
+          </P>
+          <div class="row">
+            <div class="column">
+              <img src="../img/comment1.png" alt="complaints" style="width:100%">
+            </div>
+            <div class="column">
+              <img src="../img/comment2.png" alt="complaints" style="width:100%">
+            </div>
+            <div class="column">
+              <img src="../img/comment3.png" alt="complaints" style="width:100%">
+              <p> This has always been an issue! It stands true today too</p>
+            </div>
           </div>
         </div>
+
 
         <h4> The gacha games market is also expected to have a compound annual growth rate of 8.8%</h4>
 
@@ -174,20 +175,27 @@
         <p> The market is just going to continue growing exponetially. Since it likely to be around 985.7
           million by 2032, its save to say that gacha games will continue getting released</p>
 
-        <h4> As a player, Its frustrating dealing with gacha mechanis!</h4>
-        <p> While in app purchases are not required, some games use tactics to make them appealing (timers before
-          the deal runs out, a "sale" on the product). On top of that, its very easy to fall behind in these
-          games compared to players who are able to spend money on the game to proceed. As such, gacha games
-          have a reputation of only existing as a quick cash grab. </p>
-          
-          <p> By making it so theres only a small chance for players to get the rare items. these companies
-          encourage players to spend money in hopes of increasing those chances. However, there's no clear
-          proof of this. The question arises on whether the drop rates offered by these games actually affects 
-          how players spend on the game or if it is other factors that players may have not considered.
-        </p>
 
-        <h4> So, is profit the reason why so many games nowadays include a gacha system?</h4>
-        <h5> Let's look at the performance of the 50 most profitable mobile games that contains a gacha system in 2024. </h5>
+        <div class="observe-section marketSpace addingspace hidden">
+
+          <h4> As a player, Its frustrating dealing with gacha mechanis!</h4>
+          <p> While in app purchases are not required, some games use tactics to make them appealing (timers before
+            the deal runs out, a "sale" on the product). On top of that, its very easy to fall behind in these
+            games compared to players who are able to spend money on the game to proceed. As such, gacha games
+            have a reputation of only existing as a quick cash grab. </p>
+
+          <p> By making it so theres only a small chance for players to get the rare items. these companies
+            encourage players to spend money in hopes of increasing those chances. However, there's no clear
+            proof of this. The question arises on whether the drop rates offered by these games actually affects
+            how players spend on the game or if it is other factors that players may have not considered.
+          </p>
+
+          <br>
+
+          <h4> So, is profit the reason why so many games nowadays include a gacha system?</h4>
+          <h5> Let's look at the performance of the 50 most profitable mobile games that contains a gacha system in
+            2024. </h5>
+        </div>
       </div>
     </div>
   </section>
@@ -199,13 +207,15 @@
   <section class="week3Vis">
     <div class="container">
       <h4> What are the 50 most profitale mobile games in 2024? (up until October) </h4>
-      <p> The following is a breakdown of these games alongside a breakdown of their genre's and what year the game was released in.
+      <p> The following is a breakdown of these games alongside a breakdown of their genre's and what year the game was
+        released in.
       </p>
 
       <h5> Filter the data by clicking on the genre list or the years!</h5>
       <div id="vis1"> </div>
 
-      <p> So in 2024, 14 out of the 50 most games fall under the role-playing genre, indicating that a lot of spenders tend to prefer games in that genre.
+      <p> So in 2024, 14 out of the 50 most games fall under the role-playing genre, indicating that a lot of spenders
+        tend to prefer games in that genre.
         On top of that, at least 10 games were released in 2024. This could mean that some players are simply
         spending to consume all the possible contents in that game as quickly as possible. It may also be
         recency bias where players feel more inclined to spend their money to games they just begun.
@@ -225,8 +235,9 @@
         that it isn't the rates thats affected how players spend, its the content they produce.
       </p>
 
-        <h3> Let's look at <i> The</i> best selling game in 2024, Honkai Star Rail</h3>
-        <section>
+      <h3> Let's look at <i> The</i> best selling game in 2024, Honkai Star Rail</h3>
+
+      <section class="observe-section honkaiTime addingspace hidden">
         <h4> Part 1 - What is Honkai Star Rail?</h4>
         <p> Its a free-to-play role-playing gacha video game developed and
           published by HoYoverse. It is a turn-based game, featuring the main character, the Trailblazer,
@@ -237,24 +248,31 @@
         <p> This game is technically part of HoYoverse's previous series, Honkai. Its the fourth installment
           in the Honkai series so it utilizing some characters from Honkai Impact 3rd and some gameplay
           elements from their other very popular game, Genshin Impact.</p>
-        </section>
+      </section>
 
-        <section>
+      <section class="observe-section honkaiMarch addingspace hidden">
         <h4> Part 2 - What happened in March 2024?</h4>
 
         <p> Two characters were released this month. Jing Yuan and Sparkle. </p>
-          <img src="../img/marchBanner.png" alt="Banners in march">
+        <img src="../img/marchBanner.png" alt="Banners in march">
 
-        <h4> Sparkle made her debut in this update</h4>
-        <p> With this being the first time Sparkle is released, players are more willing to spend money
-          to get her in hopes of her being the most effective characters in the update.
-        </p>
-        <img src="../img/sparkleBanner.png" alt="Image of the popularity survey results">
+        <div class="observe-section sparkleRelease addingspace">
+
+          <h4> Sparkle made her debut in this update</h4>
+          <p> With this being the first time Sparkle is released, players are more willing to spend money
+            to get her in hopes of her being the most effective characters in the update.
+          </p>
+          <img src="../img/sparkleBanner.png" alt="Image of the popularity survey results">
+        </div>
+      </section>
+
+      <section class="observe-section jingyuanTime addingspace hidden">
 
         <h4> So, who is Jingyuan?</h4>
 
-        <p> Jingyuan is currently the most popular Honkai Star Rail character 
+        <p> Jingyuan is currently the most popular Honkai Star Rail character
           based on popularity polls held by Hoyoverse, the publisher. </p>
+
         <div class="row">
           <div class="column">
             <img src="../img/jingyuan.png" alt="complaints" style="width:100%">
@@ -264,28 +282,43 @@
           </div>
         </div>
 
-        <h5> Theres a lot of reasons why players love him.</h5>
-        <div class="row">
-          <div class="column">
-            <img src="../img/jingyuanComment1.png" alt="complaints" style="width:100%">
-            <p> He appears a lot in stories and he's a decent character to play!</p>
-          </div>
-          <div class="column">
-            <img src="../img/jingyuanComment2.png" alt="complaints" style="width:100%">
-            <p> A lot of plays just find him attractive</p>
-          </div>
-          <div class="column">
-            <img src="../img/jingyuanComment3.png" alt="complaints" style="width:100%">
-            <p> Even during his first release, he's always been popular</p>
+        <div class="observe-section jingyuanWhy addingspace">
+
+          <h5> Theres a lot of reasons why players love him.</h5>
+
+          <div class="carousel-container" id="carousel3">
+            <div class="carousel-track">
+              <div class="carousel-item">
+                <h5> He appears a lot in stories and he's a useful character to have gameplay wise </h5>
+                <img src="../img/jingyuanComment1.png" alt="First reason why people like to play JingYuan">
+              </div>
+              <div class="carousel-item">
+                <h5> A lot of players just find him attractive and want him in their team</h5>
+                <img src="../img/jingyuanComment2.png" alt="Second reason why people like to play JingYuan">
+              </div>
+              <div class="carousel-item">
+                <h5> He's always been a popular character too </h5>
+                <img src="../img/jingyuanComment3.png" alt="Third reason why people like to play JingYuan">
+              </div>
+            </div>
+            <button class="carousel-button prev" onclick="moveSlide('carousel3', -1)">&#10094;</button>
+            <button class="carousel-button next" onclick="moveSlide('carousel3', 1)">&#10095;</button>
           </div>
         </div>
+      </section>
 
-        <p> Honkai also announced 3 characters that are going to be released in the upcoming
-          update of the game. This likely caused some players to immediately spend money to start
-          "saving" for those characters in advance.
+
+      <section class="observe-section newCharas addingspace hidden">
+        <h4> The publisher also announced 3 new characters to be released soon</h4>
+        <p> With Sparkle and Jingyuan's release making the 2.0 update, there are several more characters
+          introduced by the publishers to keep the game exciting and entice players into spending money to get these
+          new characters. This could be due to players enjoying their aesthetic, or hoping they'll be a good character
+          for
+          gameplay. The release announcement likely caused some players to immediately spend money to start
+          "saving" for these characters in advance.
         </p>
 
-        <h4> The 3 character release announcements on March 16th, 2024</h4>
+        <h5> The 3 character release announcements on March 16th, 2024</h5>
         <div class="row">
           <div class="column">
             <img src="../img/gallagher.png" alt="Honkai's twitter account announcing
@@ -300,7 +333,6 @@
             Aventurine's release" style="width:100%">
           </div>
         </div>
-
       </section>
 
       <h3> So, how does other games compare to Honkai? (or with each other)</h3>
@@ -308,42 +340,56 @@
 
       <div class="dropdown-container">
         <select id="dropdown1">
-          <option value="">Select first Game</option>
+          <option value="">Select First Game</option>
         </select>
         <select id="dropdown2">
-          <option value="">Select second Game</option>
+          <option value="">Select Second Game</option>
         </select>
       </div>
       <div id="vis3"> </div>
 
 
-    <h4> Is there a correlation between drop rates and revenue?</h4>
-      <p> I am still curious to see whether or not there is an overall trend with how drop rates
-        can affect the profit for various games as well as whether the number of new players joining the game
-        can affect the amount of profit a game gets because an argument could be made that new players might be more
+      <h4> Is there a correlation between drop rates and revenue?</h4>
+      <p> Based on Honkai: Star Rail's performance, it seems that revenue is affected by the characters popularity more
+        than anything. However, does drop rates still play a part in this?</p>
+      <p> The following chart looks at the correlation between a game's drop rate with a games revenue. It also looks at
+        whether the amount of new players joining the game affects the amount of profit a game gets. An argument could
+        be made that new players might be more
         likely to spend money on these games to catch up with more veteran players </p>
 
       <div id="vis4"> </div>
 
-      <h4> Finally, is it a regional thing? </h4>
-      <p> There is a believe that the reason some games make a lot of money is their Asian players, 
+      <p> Based on this chart, it does look like the revenue isn't affected by the drop rates offered by each game as
+        there is a
+        variety of them all throughout. While it seemed like games with lower drop rates tend to have more profits,
+        there are still
+        a lot of instances of other games with the same drop rate that doesn't produce even 1/10 of another games
+        profit.
+      </p>
+
+      <h4> Finally, does the region the game is hosted in affects its revenue? </h4>
+      <p> There is a believe that the reason some games make a lot of money is their Asian players,
         specifically Japanese and Chinese player. As such, games tend to market themselves
         to that market in hopes of getting them to spend money. </p>
-      <p> As we've seen, there is not really much correlation between a games drop rates and 
-        their revenue, so lets see if its a regional thing.
-      </p>
+      <h5> The region with the highest revenue overall will be colored in.</h5>
       <div id="controls">
         <label for="dropdownMenu">Select a Game Title:</label>
         <select id="dropdownMenu">
         </select>
       </div>
-      <div id="vis5"> test </div>
+      <div id="vis5" style="display: flex; justify-content: space-between; width: 100%;  margin:0 "> </div>
+      <h5> PLACEHOLDER - Im p sure its suppose to be China, but some of the code is broken :skull: </h5>
+      <p> Some games are only released in specific regions, but generally, Global produces the most revenue. Which makes
+        a lot of sense since
+        most players that don't speak Japanese or Chinese would play in these servers. It would generally have the most
+        players active playing at once. </p>
+
+      </p>
   </section>
   </div>
 
   <section id="section4">
-
-    <div class="sectionIntro">
+    <div class="observe-section sectionIntro">
       <h3> What did we learn?</h3>
     </div>
 
@@ -356,48 +402,77 @@
 
         <p> Drop rates do play a part in terms of longevity. Games released between 2012 to 2017
           had an overall higher drop rate compared to games released in 2018 onwards. </p>
-        
+
         <div id="vis6"> </div>
-        
-        <p> Video games always want to makes their veteran players happy while ensuring they make it 
-          fun and accessible for new players to maintain their game's longevity by replenishing 
-          the player base, preventing decline as older players may stop playing and generating 
-          potential revenue streams from new users. 
+
+        <p> Video games always want to makes their veteran players happy while ensuring they make it
+          fun and accessible for new players to maintain their game's longevity by replenishing
+          the player base, preventing decline as older players may stop playing and generating
+          potential revenue streams from new users.
         </p>
 
-        <h4> But likeee, if the rates are bad, no one wants to play the game!</h4>
-        <p> So, its very important for them to reach that balance when relesing games. Its not enough to just 
-          have pretty characters or design rates, it has to be a mix of both for the game to succeed!
+        <h4> So if the rates are bad, no one wants to play the game!</h4>
+        <p> Its very important for there to be good balance on the drop rates a game offers alongside the the gameplay
+          and storyline to ensure the game can succeed!
         </p>
+      </div>
+    </section>
+  </section>
 
-        <p> However, it's undeniable that gacha as a mechanic is very predatory. When gamers love get attached
-          to a character, a lot of them would do ANYTHING to get them. 
-        </p>
 
-        <div class="row">
-          <div class="column">
-            <img src="../img/consequence1.png" alt="People going into debt for gacha" style="width:100%">
-            <p> There are people that's gone broke from gacha games</p>
+  <section id="section5">
+    <div class="sectionIntro">
+      <h3> The Dangers of Gacha</h3>
+    </div>
+    <section class="week3Vis">
+      <div class="container">
+
+        <div class="observe-section gachaIsGambling hidden">
+          <h4> It is important to keep in mind that Gacha can be a dangerous mechanic.</h4>
+          <p> Gacha as a mechanic is similar to gambling. It doesn't help that when gamers love get attached
+            to a character, a lot of them would do ANYTHING to get them. As a video game developer, it is important to
+            be aware
+            of these risks and still keep a players wellbeing in mind when using the gacha mechanic.
+          </p>
+
+          <div class="carousel-container" id="carousel4">
+            <div class="carousel-track">
+              <div class="carousel-item">
+                <h5> There are people that's gone broke from gacha games </h5>
+                <img src="../img/consequence2.png" alt="Example of someone losing a lot of money to gacha">
+              </div>
+              <div class="carousel-item">
+                <h5> It's also wrapped our perception of what is "okay" to charge for in games</h5>
+                <img src="../img/consequence1.png" alt="Gacha decensitized players">
+              </div>
+              <div class="carousel-item">
+                <h5> Some people even prioritized gacha over necessities</h5>
+                <img src="../img/consequence3.png" alt="Someone chosing to live in a shitty apartment">
+              </div>
+            </div>
+            <button class="carousel-button prev" onclick="moveSlide('carousel4', -1)">&#10094;</button>
+            <button class="carousel-button next" onclick="moveSlide('carousel4', 1)">&#10095;</button>
           </div>
-          <div class="column">
-            <img src="../img/consequence2.png" alt="People going into debt for gacha" style="width:100%">
-            <p> It's also wrapped our perception of what is "okay" to charge for in games</p>
-          </div>
-          <div class="column">
-            <img src="../img/consequence3.png" alt="People going into debt for gacha" style="width:100%">
-            <p> Heck, there are even articles calling them out on these practices</p>
-          </div>
+
         </div>
 
-        <p> At the end of the day, gacha mechanics are just gambling mechanics, so its important for 
-          players to be aware of this fact, and for developers to (in good fate) not abuse their player base
-          for money to get characters they like
-        </p>
+        <div class="observe-section articleSection addingspace">
+          <h4>There are even articles calling out this issue</h4>
+          <p> An article by the Washington posts calls gacha mechanic for what it is, gambling</p>
+          <img src="../img/article.png">
+          <p> Its important for players to be aware of this fact, and for developers to (in good fate) not abuse their
+            player base
+            for money to get characters they like.
+          </p>
+        </div>
 
+        <div class="addingspace">  
         <h4> So, if you ever want to release a game and make profit (ethically), make the characters
-          hot as hell, but still doable to get! A 3% or above drop rate even 
+          hot as hell, but still doable to get!
         </h4>
-        <h5> DON'T MAKE COSMETICS THAT COST MORE THAN 30 CAD THAT DOES NOTHING thats just a scam</h5>
+        <p> Ps. DON'T MAKE COSMETICS THAT COST MORE THAN 30 CAD THAT DOES NOTHING thats just a scam
+          >:(</p>
+        </div>
       </div>
     </section>
   </section>
@@ -407,6 +482,7 @@
     <div class="dot" data-section="section2"></div>
     <div class="dot" data-section="section3"></div>
     <div class="dot" data-section="section4"></div>
+    <div class="dot" data-section="section5"></div>
   </div>
 
 
