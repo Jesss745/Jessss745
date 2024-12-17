@@ -201,3 +201,61 @@ hr {
   width: 100vw;
   max-width: 100%;
 }
+
+.what_gacha {
+  display: flex; 
+  align-items: flex-start; 
+  gap: 5vw; 
+}
+
+.what_gacha .text {
+  flex: 3; 
+  margin: auto;
+}
+
+.what_gacha img {
+  flex: 2; 
+  width: 100%;
+  max-width: 20vw; 
+  height: auto; 
+}
+
+.issuesArise{
+  margin-top: 2rem;
+}
+
+.inGameCurrency{
+display: flex; 
+  align-items: flex-start; 
+  gap: 5vw;
+}
+
+.inGameCurrency .text {
+  flex: 3; 
+}
+
+.inGameCurrency img {
+  flex: 2; 
+  width: 100%;
+  max-width: 25vw; 
+  height: auto; 
+  margin-bottom: 2rem;
+}
+
+.finalMessage{
+  display: flex; 
+    align-items: flex-start; 
+    gap: 5vw;
+  }
+  
+  .finalMessage .text {
+    flex: 2; 
+    margin: auto;
+  }
+  
+  .finalMessage img {
+    flex: 3; 
+    width: 100%;
+    max-width: 25vw; 
+    height: auto; 
+  }
