@@ -259,3 +259,21 @@ display: flex;
     max-width: 25vw; 
     height: auto; 
   }
+
+  .regionTime{
+    display: flex; 
+      align-items: flex-start; 
+      gap: 5vw;
+    }
+    
+    .regionTime .text {
+      flex: 2; 
+      margin: auto;
+    }
+    
+    .regionTime img {
+      flex: 3; 
+      width: 100%;
+      max-width: 25vw; 
+      height: auto; 
+    }
