@@ -315,7 +315,7 @@ async function render() {
         vl.y().value(75)
       )
   );
-  
+
   const range2 = vl.layer(
 
     vl.markRule({ color: '#0E4C92' })
@@ -408,122 +408,131 @@ async function render() {
 
   //vis 5
   const uniqueGame = [...new Set(GachaData.map(game => game.Title))];
-  uniqueGame.sort();
+uniqueGame.sort();
 
-  const dropdownGame = document.getElementById('dropdownMenu');
+const dropdownGame = document.getElementById('dropdownMenu');
+
+// Set "Love and Deepspace" as the initial selected game
+let initialTitle = "Love and Deepspace"; 
+
+// If "Love and Deepspace" is not in the data, use the first title as fallback
+if (!uniqueGame.includes(initialTitle)) {
+  initialTitle = uniqueGame[0]; 
+}
+
+// Populate the dropdown menu
+uniqueGame.forEach(title => {
+  const option = document.createElement('option');
+  option.value = title;
+  option.textContent = title;
+  dropdownGame.appendChild(option);
+});
+
+// Set the dropdown's selected value to "Love and Deepspace" or the fallback
+dropdownGame.value = initialTitle;
+
+function renderCharts(selectedTitle) {
+  const filteredData = GachaData.filter(game => game.Title === selectedTitle);
+
+  const stackedData = filteredData.flatMap(game => [
+    { Month: game.Month, Region: 'Global', Revenue: +game.Global_Rev || 0 },
+    { Month: game.Month, Region: 'Japan', Revenue: +game.JP_Rev || 0 },
+    { Month: game.Month, Region: 'China', Revenue: +game.CN_Rev || 0 }
+  ]);
+
+  // Calculate total revenue by region for the selected game
+  const totalSalesByRegion = {
+    Global: filteredData.reduce((sum, game) => sum + parseInt(game.Global_Rev || 0, 10), 0),
+    Japan: filteredData.reduce((sum, game) => sum + parseInt(game.JP_Rev || 0, 10), 0),
+    China: filteredData.reduce((sum, game) => sum + parseInt(game.CN_Rev || 0, 10), 0)
+  };    
+
+  // Determine the region with the highest total revenue
+  const maxRegion = Object.entries(totalSalesByRegion)
+    .reduce((max, entry) => (entry[1] > max[1] ? entry : max))[0];
+
+  const regionColors = {
+    Global: maxRegion === "Global" ? '#FB4444' : '#cccccc',
+    Japan: maxRegion === "Japan" ? '#4C78A8' : '#B4B4B4',
+    China: maxRegion === "China" ? '#FBBD44' : '#A4A4A4'
+  };
+
+  const stackedChart = vl.markBar()
+    .data(stackedData)
+    .title(`Revenue Breakdown by Region for ${selectedTitle}`)
+    .encode(
+      vl.x().fieldO('Month')
+        .title("Month")
+        .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+        .axis({ labelAngle: 0 }),
+      vl.y().fieldQ('Revenue')
+        .title("Revenue (in millions)")
+        .aggregate('sum'),
+      vl.color().fieldN('Region')
+        .title("Region")
+        .scale({
+          domain: ['Global', 'Japan', 'China'],
+          range: [regionColors.Global, regionColors.Japan, regionColors.China]
+        }),
+      vl.tooltip(['Month', 'Region', 'Revenue'])
+    )
+    .width(vis5ContainerWidth)
+    .height(500);
+
+  // Calculate counts for the region-max chart
+  const regionCounts = { Global: 0, Japan: 0, China: 0 };
   uniqueGame.forEach(title => {
-    const option = document.createElement('option');
-    option.value = title;
-    option.textContent = title;
-    dropdownGame.appendChild(option);
-  });
-
-  function renderCharts(selectedTitle) {
-    const filteredData = GachaData.filter(game => game.Title === selectedTitle);
-
-    const stackedData = filteredData.flatMap(game => [
-      { Month: game.Month, Region: 'Global', Revenue: game.Global_Rev || 0 },
-      { Month: game.Month, Region: 'Japan', Revenue: game.JP_Rev || 0 },
-      { Month: game.Month, Region: 'China', Revenue: game.CN_Rev || 0 }
-    ]);
-
-    // Calculate total revenue by region for the selected game
-    const totalSalesByRegion = {
-      Global: filteredData.reduce((sum, game) => sum + (game.Global_Rev || 0), 0),
-      Japan: filteredData.reduce((sum, game) => sum + (game.JP_Rev || 0), 0),
-      China: filteredData.reduce((sum, game) => sum + (game.CN_Rev || 0), 0)
+    const gameData = GachaData.filter(game => game.Title === title);
+    const totalRevenue = {
+      Global: gameData.reduce((sum, game) => sum + parseInt(game.Global_Rev || 0), 0),
+      Japan: gameData.reduce((sum, game) => sum + parseInt(game.JP_Rev || 0), 0),
+      China: gameData.reduce((sum, game) => sum + parseInt(game.CN_Rev || 0), 0)
     };
 
-    // Determine the region with the highest total revenue
-    const maxRegion = Object.entries(totalSalesByRegion)
+    const highestRegion = Object.entries(totalRevenue)
       .reduce((max, entry) => (entry[1] > max[1] ? entry : max))[0];
-
-    const regionColors = {
-      Global: maxRegion === "Global" ? '#FB4444' : '#cccccc',
-      Japan: maxRegion === "Japan" ? '#4C78A8' : '#B4B4B4',
-      China: maxRegion === "China" ? '#FBBD44' : '#A4A4A4'
-    };
-
-    const stackedChart = vl.markBar()
-      .data(stackedData)
-      .title(`Revenue Breakdown by Region for ${selectedTitle}`)
-      .encode(
-        vl.x().fieldO('Month')
-          .title("Month")
-          .sort(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
-          .axis({ labelAngle: 0 }),
-        vl.y().fieldQ('Revenue')
-          .title("Revenue (in millions)")
-          .aggregate('sum'),
-        vl.color().fieldN('Region')
-          .title("Region")
-          .scale({
-            domain: ['Global', 'Japan', 'China'],
-            range: [regionColors.Global, regionColors.Japan, regionColors.China]
-          }),
-        vl.tooltip(['Month', 'Region', 'Revenue'])
-      )
-      .width(vis5ContainerWidth)
-      .height(500);
-
-    // Calculate counts for the region-max chart
-    const regionCounts = { Global: 0, Japan: 0, China: 0 };
-    uniqueGame.forEach(title => {
-      const gameData = GachaData.filter(game => game.Title === title);
-      const totalRevenue = {
-        Global: gameData.reduce((sum, game) => sum + (game.Global_Rev || 0), 0),
-        Japan: gameData.reduce((sum, game) => sum + (game.JP_Rev || 0), 0),
-        China: gameData.reduce((sum, game) => sum + (game.CN_Rev || 0), 0)
-      };
-
-      const highestRegion = Object.entries(totalRevenue)
-        .reduce((max, entry) => (entry[1] > max[1] ? entry : max))[0];
-      regionCounts[highestRegion]++;
-    });
-
-    // Prepare data for the region-max bar chart
-    const regionMaxRevenueData = [
-      { Region: 'Global', Count: regionCounts.Global },
-      { Region: 'Japan', Count: regionCounts.Japan },
-      { Region: 'China', Count: regionCounts.China }
-    ];
-
-    const regionMaxChart = vl.markBar()
-      .data(regionMaxRevenueData)
-      .title("Which Region Generally Had the Most Revenue")
-      .encode(
-        vl.y().fieldN('Region').title(""),
-        vl.x().fieldQ('Count').title("Count"),
-        vl.color().fieldN('Region')
-          .scale({
-            domain: ['Global', 'Japan', 'China'],
-            range: ['#FB4444', '#4C78A8', '#FBBD44']
-          }),
-        vl.tooltip(['Region', 'Count'])
-      )
-      .width(vis52ContainerWidth)
-      .height(200);
-
-    const combinedVis = vl.hconcat(stackedChart, regionMaxChart)
-      .spacing(20)
-      .toSpec();
-
-    vegaEmbed("#vis5", combinedVis, { renderer: 'svg', actions: false })
-      .then(result => {
-        const view = result.view;
-        view.run();
-      })
-      .catch(console.error);
-  }
-
-  dropdownGame.addEventListener('change', (event) => {
-    const selectedTitle = event.target.value;
-    renderCharts(selectedTitle);
+    regionCounts[highestRegion]++;
   });
 
-  if (uniqueGame.length > 0) {
-    renderCharts(uniqueGame[0]);
-  }
+  // Prepare data for the region-max bar chart
+  const regionMaxRevenueData = [
+    { Region: 'Global', Count: regionCounts.Global },
+    { Region: 'Japan', Count: regionCounts.Japan },
+    { Region: 'China', Count: regionCounts.China }
+  ];
+
+  const regionMaxChart = vl.markBar()
+    .data(regionMaxRevenueData)
+    .title("Which Region Generally Had the Most Revenue")
+    .encode(
+      vl.y().fieldN('Region').title(""),
+      vl.x().fieldQ('Count').title("Count"),
+      vl.color().fieldN('Region'),
+      vl.tooltip(['Region', 'Count'])
+    )
+    .width(vis52ContainerWidth)
+    .height(200);
+
+  const combinedVis = vl.hconcat(stackedChart, regionMaxChart)
+    .spacing(20)
+    .toSpec();
+
+  vegaEmbed("#vis5", combinedVis, { renderer: 'svg', actions: false })
+    .then(result => {
+      const view = result.view;
+      view.run();
+    })
+    .catch(console.error);
+}
+
+// Render the initial charts for "Love and Deepspace" or fallback
+renderCharts(initialTitle);
+
+// Add event listener for dropdown changes
+dropdownGame.addEventListener('change', (event) => {
+  const selectedTitle = event.target.value;
+  renderCharts(selectedTitle);
+});
 
 }
 render();
@@ -533,7 +542,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".observe-section");
 
   const observerOptions = {
-    root: null, 
+    root: null,
     threshold: 0.1,
   };
 
@@ -680,7 +689,7 @@ const spec = {
         "color": {
           "value": "black"
         },
-        "tooltip": [ 
+        "tooltip": [
           { "field": "year", "type": "ordinal", "title": "Year" },
           { "field": "market_size", "type": "quantitative", "title": "Market Size (USD Million)", "format": ".1f" }
         ]

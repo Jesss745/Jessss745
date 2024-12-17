@@ -194,3 +194,10 @@ margin: 0;
     width: 100%;
   }
 }
+
+hr {
+  border: 1px solid var(--green-500);
+  border-radius: 5px;
+  width: 100vw;
+  max-width: 100%;
+}
