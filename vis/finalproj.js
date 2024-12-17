@@ -30,7 +30,7 @@ async function render() {
   const firstPart = GachaData.filter((item) => { return item.Year_Released <= 2017 })
   const secondPart = GachaData.filter((item) => { return item.Year_Released <= 2024 & item.Year_Released >= 2018 })
   //const GoodSales = GachaData.filter((item) => { return item.Drop_Rates >= 5 })
-  const GoodSales = GachaData.filter((item) => { return item.Downloads <= 3 & item.Overal_Rev <= 50 })
+  const GoodSales = GachaData.filter((item) => { return item.Downloads <= 3 & item.Overal_Rev <= 100 })
   const Honkai = GachaData.filter((item) => { return item.Title === "Honkai: Star Rail" })
 
   const click = vl.selectPoint()
@@ -79,6 +79,7 @@ async function render() {
     .encode(
       vl.y().fieldN('Year_Released').aggregate('count').title("Year Released"),
       vl.x().fieldN('Year_Released').axis({ labelAngle: 0 }),
+      vl.color().value('gray')
     )
     .width(halfContainerWidth)
     .height(400)
@@ -230,9 +231,9 @@ async function render() {
     .title('Downloads vs Revenue')
     .params(brush2)
     .encode(
-      vl.x().fieldQ('Overal_Rev').scale({ domain: [0, 50] }),
+      vl.x().fieldQ('Overal_Rev').scale({ domain: [0, 100] }),
       //vl.x().fieldQ('Overal_Rev').scale({domain: [0, 75]}),
-      //vl.y().fieldQ('Downloads').scale({domain: [0, 30]}).axis({tickCount: 5}),
+      //vl.y().fieldQ('Downloads').scale({domain: [0,30]}).axis({tickCount: 5}),
       vl.y().fieldQ('Downloads').scale({ domain: [0, 3] }).axis({ tickCount: 5 }),
       vl.size().fieldQ('Drop_Rates').title('Drop Rates by percentage'),
       vl.color().value('lightgray').legend(null).if(click, vl.color().fieldN('Genre').title('Movie Genres')),
@@ -507,7 +508,7 @@ function renderCharts(selectedTitle) {
     .encode(
       vl.y().fieldN('Region').title(""),
       vl.x().fieldQ('Count').title("Count"),
-      vl.color().fieldN('Region').legend,
+      vl.color().fieldN('Region').legend(null),
       vl.tooltip(['Region', 'Count'])
     )
     .width(vis52ContainerWidth)
