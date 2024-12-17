@@ -507,7 +507,7 @@ function renderCharts(selectedTitle) {
     .encode(
       vl.y().fieldN('Region').title(""),
       vl.x().fieldQ('Count').title("Count"),
-      vl.color().fieldN('Region'),
+      vl.color().fieldN('Region').legend,
       vl.tooltip(['Region', 'Count'])
     )
     .width(vis52ContainerWidth)
